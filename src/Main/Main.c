@@ -1,4 +1,6 @@
-//Inculde the header file
+//Include the header files
+
+
 
 //id unsigned long
 typedef struct joueur{
