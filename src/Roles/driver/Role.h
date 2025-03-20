@@ -9,10 +9,10 @@
 #include "Employee.h"
 
 
-#define BH 0
-#define WH 1
-#define COMPANY 2
-#define EMPLOYEE 3
+#define BH 1
+#define WH 2
+#define COMPANY 3
+#define EMPLOYEE 4
 
 
 typedef unsigned int id;
@@ -29,8 +29,7 @@ typedef struct Player{
 
 
 int end();
-Player* create_player(char num, id carte);
+Player* create_player(id carte);
 void play(Player* player, id card, char target);
-void free_player(Player* player);
 
 #endif

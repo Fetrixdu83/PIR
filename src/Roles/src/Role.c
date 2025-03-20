@@ -8,18 +8,18 @@ int end()
            Employee_end();
 }
 
-Player* create_player(char role, id carte)
+Player* create_player(id carte)//si le format RFID est sur 32 BIT
 {
-    switch(role)
+    switch(carte >> 16) // On ne garde que les 16 premiers bits
     {
         case BH:
-            return BH_create_player(carte);
+            return BH_create_player();
         case WH:
-            return WH_create_player(carte);
+            return WH_create_player();
         case COMPANY:
-            return Company_create_player(carte);
+            return Company_create_player();
         case EMPLOYEE:
-            return Employee_create_player(carte);
+            return Employee_create_player();
         default:
             return NULL;
     }
