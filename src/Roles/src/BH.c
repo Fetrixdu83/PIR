@@ -1,19 +1,22 @@
 #include "../driver/Role.h"
+#include "../driver/BH.h"
 
 int BH_end() //Win condition of BH
 {
+    return 0;
 }
 
 /*pas de pointeur pour le moment j'en vois pas vraiment l'utilité*/
-Player BH_create_player() //Create a player with the BH role
+/*En créant un joeur on renvoit son @ qui sera stocké dans un tableau de joueur*/
+Player* BH_create_player() //Create a player with the BH role
 {
-    Player BH_player;
-    BH_player.role = BH;
-    BH_player.piece = 1; // Initialize piece to 0
-    BH_player.num = 1; // Initialize num to 0
-    BH_player.money = 3; // Initialize money to 0
-    BH_player.played_card = NULL; // Initialize played_card to NULL
-    BH_player.place = 0; // Initialize place to 0
+    Player* BH_player = malloc(sizeof(Player));
+    BH_player->role = BH;
+    BH_player->piece = 1; // Initialize piece to 0
+    BH_player->num = 1; // Initialize num to 0
+    BH_player->money = 3; // Initialize money to 0
+    BH_player->played_card = NULL; // Initialize played_card to NULL
+    BH_player->place = 0; // Initialize place to 0
     return BH_player;
 }
 

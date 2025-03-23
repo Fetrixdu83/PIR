@@ -10,7 +10,7 @@ int end()
 
 Player* create_player(id carte)//si le format RFID est sur 32 BIT
 {
-    switch(carte >> 16) // On ne garde que les 16 premiers bits
+    switch(carte >> CARD_BITS) // On ne garde que les bits spécifiques au role
     {
         case BH:
             return BH_create_player();
