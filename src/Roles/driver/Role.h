@@ -1,6 +1,18 @@
 #ifndef ROLE_H
 #define ROLE_H
 
+
+typedef unsigned int id;
+typedef struct Player{
+    char role;
+    id piece;
+    char num;
+    char money;
+    id* played_card;
+    id place;
+
+}Player;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "BH.h"
@@ -14,18 +26,9 @@
 #define COMPANY 3
 #define EMPLOYEE 4
 
+#define CARD_BITS 4
 
-typedef unsigned int id;
 
-typedef struct Player{
-    char role;
-    id piece;
-    char num;
-    char money;
-    id* played_card;
-    id place;
-
-}Player;
 
 
 int end();

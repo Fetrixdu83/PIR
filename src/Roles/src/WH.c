@@ -1,19 +1,21 @@
 #include "../driver/Role.h"
+#include "../driver/WH.h"
 
 int WH_end() //Win condition of WH
 {
+    return 0;
 }
 
 /*pas de pointeur pour le moment j'en vois pas vraiment l'utilité*/
-Player WH_create_player() //Create a player with the WH role
+Player* WH_create_player() //Create a player with the WH role
 {
-    Player WH_player;
-    WH_player.role = WH;
-    WH_player.piece = 2; 
-    WH_player.num = 2; 
-    WH_player.money = 3; 
-    WH_player.played_card = NULL; 
-    WH_player.place = 0; 
+    Player* WH_player = (Player*) malloc(sizeof(Player));
+    WH_player->role = WH;
+    WH_player->piece = 2; 
+    WH_player->num = 2; 
+    WH_player->money = 3; 
+    WH_player->played_card = NULL; 
+    WH_player->place = 0; 
     return WH_player;
 }
 

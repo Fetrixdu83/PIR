@@ -8,13 +8,13 @@ Ce projet de recherche vise à sensibiliser les personnes aux enjeux de la cyber
 
 Le jeu est prévu pour accueillir entre 4 et 8 joueurs. Cette première version se joue avec 4 participants, chacun incarnant un rôle distinct :
 
-Black Hat : Un cybercriminel cherchant à exploiter les failles de sécurité.
+Black Hat  🎩 : Un cybercriminel cherchant à exploiter les failles de sécurité.
 
-White Hat : Un expert en cybersécurité qui tente de protéger les systèmes.
+White Hat  🧢 : Un expert en cybersécurité qui tente de protéger les systèmes.
 
-Étudiant 👩🏻‍💻 : Un apprenant en cybersécurité qui doit naviguer entre les bonnes et mauvaises pratiques.
+Étudiant   👩🏻‍💻 : Un apprenant en cybersécurité qui doit naviguer entre les bonnes et mauvaises pratiques.
 
-Entreprise : Une organisation cherchant à se protéger contre les cyberattaques.
+Entreprise 🏢 : Une organisation cherchant à se protéger contre les cyberattaques.
 
 ## Fonctionnement
 
@@ -42,3 +42,13 @@ Dans les prochaines itérations, nous prévoyons d'étendre le nombre de joueurs
 
 Nous espérons que ce projet contribuera à une meilleure compréhension des enjeux de la cybersécurité tout en permettant aux joueurs de s'amuser !
 
+
+
+## Collaborateurs : 
+- [SELLAMI Kais](https://github.com/Ksel1010)
+- [MARTIN Cédric](https://github.com/Fetrixdu83)
+- [FERREIRA Sami-Koe](https://github.com/skferrei31)
+- [CHEN Juxin](https://github.com/Juxin233)
+- [LAVERGNE Célia](https://github.com/C3-code)
+- [LACIRE Aurélie](https://github.com/aurelcre)
+- [DUPRAT Malik]()
