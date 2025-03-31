@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     
     
     for(int i = 0; i<NB_PLAYERS; i++){
-        printf("le joueur %d est de type ", i+1);
+        printf("le joueur %x est de type ", i+1);
         switch (players[i]->role){
             case BH:
                 printf("Black Hat\n");
@@ -38,7 +38,11 @@ int main(int argc, char *argv[])
         }
         
     }
-
+    notify_player(players[0], "Bonjour, je suis le joueur 1.");
+    notify_player(players[1], "Bonjour, je suis le joueur 2.");
+    notify_player(players[0],"voici un message pour le joueur 1.");
+    notify_global("Message global 1");
+    print_message(players);
     return 0;
 }
 
@@ -52,13 +56,13 @@ Player** init_game(){
 }
 
 Player* init_player(int id){
-    printf("Veuillez rentrer le code d'une carte speciale pour le joueur numero : %d\n", id+1);
+    printf("Veuillez rentrer le code d'une carte speciale pour le joueur numero : %x\n", id+1);
     int card;
-    scanf("%d", &card);
+    scanf("%x", &card);
     Player* player = create_player(card);
     if (player==NULL) {
         printf("Erreur lors de l'initialisation\n");
-        printf("Le code %d ne correspond a aucune carte speciale.\n", card);
+        printf("Le code %x ne correspond a aucune carte speciale.\n", card);
         return init_player(id);
     }
     switch(player->role){
