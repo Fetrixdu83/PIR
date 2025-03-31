@@ -90,7 +90,7 @@ void notify_player(Player* player, char message[255])
         while (current != NULL && current->next != NULL) {
             current = current->next;
         }
-        player->message = new_message;
+        current->next = new_message;
     }
 }
 
@@ -100,7 +100,7 @@ void print_message(Player** players)
     for(int i = 0; i < sizeof(players); i++) {
         Message* current = players[i]->message;
         printf("Messages pour le Joueur %d: ( Roles : %d) \n", players[i]->num, players[i]->role);
-        while (current != NULL) {
+        while (current != NULL){
             Message* to_free = current; // Store the message to free later
             printf("%s\n", current->message);
             current = current->next;
