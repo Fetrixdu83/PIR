@@ -17,6 +17,8 @@ Player* BH_create_player() //Create a player with the BH role
     BH_player->money = 3; // Initialize money to 0
     BH_player->played_card = NULL; // Initialize played_card to NULL
     BH_player->place = 0; // Initialize place to 0
+    BH_player->message = NULL; // Initialize message tab to NULL
+
     return BH_player;
 }
 
@@ -46,6 +48,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                     break;
             break;
         case BH_CORRUPT: // BH card 1
+        case BH_CORRUPT: // BH card 1
             // Implement the effect of BH card 1
             if(player->money >= 2){
                 player->money -= 2; 
@@ -57,6 +60,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             }    
             break; 
         case BH_BOTNET: // BH card 2
+        case BH_BOTNET: // BH card 2
             // Implement the effect of BH card 2
             if(player->money >= 1){
                 player->money -= 1; 
@@ -66,6 +70,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             
             } 
             break;
+        case BH_DDoS: // BH card 3
         case BH_DDoS: // BH card 3
             // Implement the effect of BH card 3
             if(player->money >= 1){
@@ -77,6 +82,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             } 
             break;
         case BH_BRUTE_FORCE: // BH card 4    
+        case BH_BRUTE_FORCE: // BH card 4    
             // Implement the effect of BH card 4
             if(player->money >= 1){
                 player->money -= 1; 
@@ -86,6 +92,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             
             } 
             break;
+        case BH_PHISHING: // BH card 5
         case BH_PHISHING: // BH card 5
             // Implement the effect of BH card 5
             if(player->money >= 2){
@@ -97,6 +104,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             } 
             break;
         case BH_SQL_INJECTION: // BH card 6    
+        case BH_SQL_INJECTION: // BH card 6    
             // Implement the effect of BH card 6
             if(player->money >= 3){
                 player->money -= 3; 
@@ -107,6 +115,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             } 
             break;
         case BH_XSS: // BH card 7    
+        case BH_XSS: // BH card 7    
             // Implement the effect of BH card 7
             if(player->money >= 4){
                 player->money -= 4; 
@@ -116,6 +125,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             
             } 
             break;
+        case BH_PHYSICAL_ATTACK: // BH card 8
         case BH_PHYSICAL_ATTACK: // BH card 8
             // Implement the effect of BH card 8
             if(player->money >= 3){
