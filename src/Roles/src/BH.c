@@ -18,7 +18,7 @@ Player* BH_create_player() //Create a player with the BH role
     BH_player->played_card = NULL; // Initialize played_card to NULL
     BH_player->place = 0; // Initialize place to 0
     BH_player->message = NULL; // Initialize message tab to NULL
-
+    BH_player->Alive = ALIVE;
     return BH_player;
 }
 

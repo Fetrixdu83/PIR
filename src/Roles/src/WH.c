@@ -17,7 +17,7 @@ Player* WH_create_player() //Create a player with the WH role
     WH_player->played_card = NULL; 
     WH_player->place = 0; 
     WH_player->message = NULL; // Initialize message tab to NULL
-
+    WH_player->Alive = ALIVE;
     return WH_player;
 }
 

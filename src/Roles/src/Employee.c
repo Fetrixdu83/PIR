@@ -17,7 +17,7 @@ Player* Employee_create_player() //Create a player with the Employee role
     Employee_player->played_card = NULL; 
     Employee_player->place = 0; 
     Employee_player->message = NULL; // Initialize message tab to NULL
-
+    Employee_player->Alive = ALIVE;
     return Employee_player;
 }
 

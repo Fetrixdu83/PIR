@@ -16,7 +16,7 @@ Player* Company_create_player() //Create a player with the Company role
     Company_player->played_card = NULL; 
     Company_player->place = 0; 
     Company_player->message = NULL; // Initialize message tab to NULL
-
+    Company_player->Alive = ALIVE;
     return Company_player;
 }
 

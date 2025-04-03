@@ -38,14 +38,40 @@ int main(int argc, char *argv[])
         }
         
     }
+    play_cards(players, NB_PLAYERS);
+
+
+    /*
     notify_player(players[0], "Bonjour, je suis le joueur 1.");
     notify_player(players[1], "Bonjour, je suis le joueur 2.");
     notify_player(players[0],"voici un message pour le joueur 1.");
     notify_global("Message global 1");
     print_message(players, NB_PLAYERS);
+    notify_player(players[0],"Reinitialisation.");
+    print_message(players, NB_PLAYERS);
+    */
     return 0;
 }
 
+
+void play_cards(Player** players, int nb_players){
+    Player* player;
+    int card;
+    char target;
+    
+    for(int i=0; i<nb_players; i++){
+        if(players[i]->Alive){
+            printf("May the player number %d insert the card id and the target\n", i+1);
+            scanf("%x %c", &card, &target );
+            if (play(players[i], card, target)){
+
+            }else{
+                printf("The payed card is not permitted \n");
+                i--;
+            }
+        }
+    }
+}
 
 Player** init_game(){
     Player** players = malloc(NB_PLAYERS* sizeof(Player*));
