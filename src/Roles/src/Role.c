@@ -48,7 +48,7 @@ void play(Player* player, id card, char target)
     }
 }
 
-void notify_global(char message[255])
+void notify_broadcast(char message[255])
 {
     Message* new_message = malloc(sizeof(Message));
     
@@ -99,7 +99,7 @@ void print_message(Player** players)
     //print pour tout les joueurs
     for(int i = 0; i < sizeof(players); i++) {
         Message* current = players[i]->message;
-        printf("Messages pour le Joueur %d: ( Roles : %d) \n", players[i]->num, players[i]->role);
+        printf("Messages for the  %d: ( Roles : %d) \n", players[i]->num, players[i]->role);
         while (current != NULL){
             Message* to_free = current; // Store the message to free later
             printf("%s\n", current->message);

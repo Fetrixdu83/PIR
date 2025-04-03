@@ -1,34 +1,6 @@
-//Inculde the header file
+//Include the header file
 #include "../Roles/driver/Role.h"
 #include "../RFID/RFID.h"
-
-
-//id unsigned long
-typedef struct joueur{
-    Role role,
-    id pion,
-    char numero,
-    int argent,
-    cartes * carte_jouee,
-    id lieu
-}Joueur;
-
-Joueur joueur[8];
-
-
-int main(int argc, char *argv[])
-{
-    Player player[4];
-    init_game(4); // Initialize the game with 4 players
-    while (1)
-    {
-        
-    }
-
-    return 0;
-}
-
-
 
 void init_game(int nb_players)
 {
@@ -42,4 +14,16 @@ void init_game(int nb_players)
             CD = 0; // Reset the flag after creating the player
         }
     }
+}
+
+int main(int argc, char *argv[])
+{
+    Player player[4];
+    init_game(4); // Initialize the game with 4 players
+    while (1)
+    {
+        
+    }
+
+    return 0;
 }
