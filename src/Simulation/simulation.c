@@ -47,9 +47,9 @@ int main(int argc, char *argv[])
                 printf("ERROR! Role not recognized.\n");
                 break;
         }
-        play_cards (game->players, NB_PLAYERS);
-
+        
     }
+    play_cards (game->players, NB_PLAYERS);
 /*
 
     //to test personal messages
@@ -76,15 +76,15 @@ void play_cards(Player** players, int nb_players){
     
     for(int i=0; i<nb_players; i++){
         if(players[i]->Alive){
-            printf("May the player number %d insert the card id and the target\n", i+1);
-            scanf("%x %c", &card, &target );
-            printf("card: %d et target %c\n", card, target);
-            /*if (play(players[i], card, target)){
+            printf("May the player number %d insert the card id, his position and the target\n", i+1);
+            scanf("%x %i %c", &card, &(players[i]->place), &target );
+            printf("card: %d position  %d et target %c\n", card,players[i]->place,  target);
+            if (play(players[i], card, target)){
 
             }else{
                 printf("The payed card is not permitted \n");
                 i--;
-            }*/
+            }
         }
     }
 }
@@ -106,7 +106,7 @@ Game* init_game(int nb_players){
 }
 
 Player* init_player(int id){
-    printf("Please input the code of a special card for the player n°%x.\n", id+1);
+    printf("Please input the code of a special card for the player n: %x.\n", id+1);
     int card;
     scanf("%x", &card);
     Player* player = create_player(card);

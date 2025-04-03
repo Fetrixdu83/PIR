@@ -13,7 +13,7 @@
 #define BH_PHYSICAL_ATTACK         0x18
 
 Player* BH_create_player();
-void BH_play(Player* player, id card, char target);
+int BH_play(Player* player, id card, char target);
 int BH_end();
 
 
