@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
     notify_player(players[1], "Bonjour, je suis le joueur 2.");
     notify_player(players[0],"voici un message pour le joueur 1.");
     notify_global("Message global 1");
-    print_message(players);
+    print_message(players, NB_PLAYERS);
     return 0;
 }
 

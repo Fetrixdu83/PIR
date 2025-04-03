@@ -94,10 +94,10 @@ void notify_player(Player* player, char message[255])
     }
 }
 
-void print_message(Player** players)
+void print_message(Player** players, int nb_players)
 {
     //print pour tout les joueurs
-    for(int i = 0; i < sizeof(players); i++) {
+    for(int i = 0; i < nb_players; i++) {
         Message* current = players[i]->message;
         printf("Messages pour le Joueur %d: ( Roles : %d) \n", players[i]->num, players[i]->role);
         while (current != NULL){
