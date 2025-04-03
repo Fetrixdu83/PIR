@@ -1,10 +1,6 @@
 #ifndef ROLE_H
 #define ROLE_H
 
-
-
-
-
 typedef struct Message{
     char message[255];
     struct Message* next;
@@ -30,8 +26,6 @@ typedef struct Player{
 #include "Company.h"
 #include "Employee.h"
 
-
-
 #define BH 1
 #define WH 2
 #define COMPANY 3
@@ -52,7 +46,7 @@ int play(Player* player, id card, char target);
 //Add an element to the message tab of the player
 void notify_player(Player* player, char message[255]);// Tab of message of 255 char max
 void print_message(Player** player, int nb_players); // Print the message tab of the player
-void notify_global(char message[255]); // Add a message to the global message list
+void notify_broadcast(char message[255]); // Add a message to the global message list
 
 
 #endif
