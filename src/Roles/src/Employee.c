@@ -34,7 +34,7 @@ void Employee_play(Player* player, id card, char target) //Play function for Emp
         case EM_MEETING: // Employee card 2
             // Implement the effect of Employee card 2
             break;
-        case EM__PWD_TRAINING: // Employee card 3
+        case EM_PWD_TRAINING: // Employee card 3
             // Implement the effect of Employee card 3
             break;
         case EM_BREAK: // Employee card 4    

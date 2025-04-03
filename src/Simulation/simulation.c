@@ -14,7 +14,7 @@ typedef struct Game{
     int elapsed_turns; //to count current number of turns
 }Game;
 
-Game* init_game(); //function to initialize all global variables of the game
+Game* init_game(int nb_players); //function to initialize all global variables of the game
 Player* init_player(int id); //function to initialize all variables for each player depending on their role
 
 
@@ -68,15 +68,18 @@ int main(int argc, char *argv[])
 Game* init_game(int nb_players){
     Game* game = malloc(sizeof(Game));
 
-    //start turn counter to 0 (game hasn't started yet)
-    game->elapsed_turns=0;
-
     //create the player list
     Player** players = malloc(nb_players*sizeof(Player*));
     for (int i = 0; i < nb_players; i++){
         players[i] = init_player(i);
     }
     game->players=players;
+
+    //initialize number of total players
+    game->nb_players=nb_players;
+
+    //start turn counter to 0 (game hasn't started yet)
+    game->elapsed_turns=0;
 
     return game;
 }
