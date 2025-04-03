@@ -14,7 +14,7 @@ typedef struct Game{
     int elapsed_turns; //to count current number of turns
 }Game;
 
-Game* init_game(); //function to initialize all global variables of the game
+Game* init_game(int nb_players); //function to initialize all global variables of the game
 Player* init_player(int id); //function to initialize all variables for each player depending on their role
 
 
