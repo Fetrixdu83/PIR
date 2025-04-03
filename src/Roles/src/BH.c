@@ -33,7 +33,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                     player->money += 3; // Gain 3 money
                     return SUCCESS; // Card played successfully
                     break;
-                case PLACE_CYPERCAFE:
+                case PLACE_CYBERCAFE:
                     return FAILURE_WRONG_PLACE; // Card played in a wrong place
                     break;
                 case PLACE_LIBRARY:
