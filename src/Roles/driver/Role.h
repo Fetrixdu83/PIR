@@ -15,6 +15,7 @@ typedef struct Player{
     id* played_card;
     id place;
     Message* message;
+    int Alive;
 }Player;
 
 #include <stdio.h>
@@ -41,9 +42,15 @@ typedef struct Player{
 #define FAILURE_WRONG_PLACE -1
 #define FAILURE_NOT_ENOUGH_MONEY 0
 
+#define ALIVE 1
+#define DEAD 0
+
+#define COMMON_CARD 0x1
+
+
 int end();
 Player* create_player(id carte);
-void play(Player* player, id card, char target);
+int play(Player* player, id card, char target);
 
 //Add an element to the message tab of the player
 void notify_player(Player* player, char message[255]);// Tab of message of 255 char max

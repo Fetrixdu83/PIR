@@ -17,7 +17,7 @@ Player* Employee_create_player() //Create a player with the Employee role
     Employee_player->played_card = NULL; 
     Employee_player->place = 0; 
     Employee_player->message = NULL; // Initialize message tab to NULL
-
+    Employee_player->Alive = ALIVE;
     return Employee_player;
 }
 
@@ -25,7 +25,7 @@ Player* Employee_create_player() //Create a player with the Employee role
 void Employee_play(Player* player, id card, char target) //Play function for Employee
 {
     switch(card){
-        case 0x30: // Employee card 0 AKA Common card
+        case COMMON_CARD: // Employee card 0 AKA Common card
             // Implement the effect of Employee Common card
             break;
         case EM_OPEN_MAIL: // Employee card 1
