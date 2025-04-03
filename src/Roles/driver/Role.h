@@ -30,7 +30,16 @@ typedef struct Player{
 #define COMPANY 3
 #define EMPLOYEE 4
 
+#define CARD_COMMON 0x0001000
 #define CARD_BITS 4
+
+#define PLACE_ENTREPRISE 0
+#define PLACE_CYPERCAFE 1
+#define PLACE_BANK 2
+#define PLACE_LIBRARY 3
+#define SUCCESS 1
+#define FAILURE_WRONG_PLACE -1
+#define FAILURE_NOT_ENOUGH_MONEY 0
 
 int end();
 Player* create_player(id carte);
