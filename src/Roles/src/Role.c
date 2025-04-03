@@ -32,19 +32,15 @@ int play(Player* player, id card, char target)
     switch(player->role)
     {
         case BH:
-            BH_play(player, card, target);
-            break;
+            return BH_play(player, card, target);
         case WH:
-            WH_play(player, card, target);
-            break;
+            return WH_play(player, card, target);
         case COMPANY:
-            Company_play(player, card, target);
-            break;
+            return Company_play(player, card, target);
         case EMPLOYEE:
-            Employee_play(player, card, target);
-            break;
+            return Employee_play(player, card, target);
         default:
-            break;
+            return -1;
     }
     return 1;
 }

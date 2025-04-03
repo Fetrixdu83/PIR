@@ -22,7 +22,7 @@ Player* WH_create_player() //Create a player with the WH role
 }
 
 
-void WH_play(Player* player, id card, char target) //Play function for WH
+int WH_play(Player* player, id card, char target) //Play function for WH
 {
     switch(card){
         case COMMON_CARD: // WH card 0 AKA Common card

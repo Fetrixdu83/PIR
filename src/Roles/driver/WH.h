@@ -13,7 +13,7 @@
 #define WH_TRAINING                 0x28
 
 Player* WH_create_player();
-void WH_play(Player* player, id card, char target);
+int WH_play(Player* player, id card, char target);
 int WH_end();
 
 #endif
