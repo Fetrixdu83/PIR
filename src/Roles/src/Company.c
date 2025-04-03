@@ -16,7 +16,7 @@ Player* Company_create_player() //Create a player with the Company role
     Company_player->played_card = NULL; 
     Company_player->place = 0; 
     Company_player->message = NULL; // Initialize message tab to NULL
-
+    Company_player->Alive = ALIVE;
     return Company_player;
 }
 
@@ -24,7 +24,7 @@ Player* Company_create_player() //Create a player with the Company role
 void Company_play(Player* player, id card, char target) //Play function for Company
 {
     switch(card){
-        case 0x20: // Company card 0 AKA Common card
+        case COMMON_CARD: // Company card 0 AKA Common card
             // Implement the effect of Company Common card
             break;
         case CO_FIREWALL: // Company card 1

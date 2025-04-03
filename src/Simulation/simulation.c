@@ -14,9 +14,9 @@ typedef struct Game{
     int elapsed_turns; //to count current number of turns
 }Game;
 
-Game* init_game(); //function to initialize all global variables of the game
+Game* init_game(int nb_players); //function to initialize all global variables of the game
 Player* init_player(int id); //function to initialize all variables for each player depending on their role
-
+void play_cards(Player** players, int nb_players); //function to play all cards in a tour
 
 int main(int argc, char *argv[])
 {
@@ -47,8 +47,10 @@ int main(int argc, char *argv[])
                 printf("ERROR! Role not recognized.\n");
                 break;
         }
-        
+        play_cards (game->players, NB_PLAYERS);
+
     }
+/*
 
     //to test personal messages
     notify_player(game->players[0], "Hi, I am player 1");
@@ -62,7 +64,29 @@ int main(int argc, char *argv[])
     
     //yeah idk
     print_message(game->players, NB_PLAYERS);
+*/
     return 0;
+}
+
+
+void play_cards(Player** players, int nb_players){
+    Player* player;
+    int card;
+    char target;
+    
+    for(int i=0; i<nb_players; i++){
+        if(players[i]->Alive){
+            printf("May the player number %d insert the card id and the target\n", i+1);
+            scanf("%x %c", &card, &target );
+            printf("card: %d et target %c\n", card, target);
+            /*if (play(players[i], card, target)){
+
+            }else{
+                printf("The payed card is not permitted \n");
+                i--;
+            }*/
+        }
+    }
 }
 
 Game* init_game(int nb_players){

@@ -17,7 +17,7 @@ Player* WH_create_player() //Create a player with the WH role
     WH_player->played_card = NULL; 
     WH_player->place = 0; 
     WH_player->message = NULL; // Initialize message tab to NULL
-
+    WH_player->Alive = ALIVE;
     return WH_player;
 }
 
@@ -25,7 +25,7 @@ Player* WH_create_player() //Create a player with the WH role
 void WH_play(Player* player, id card, char target) //Play function for WH
 {
     switch(card){
-        case 0x20: // WH card 0 AKA Common card
+        case COMMON_CARD: // WH card 0 AKA Common card
             // Implement the effect of WH Common card
             break;
         case WH_BLACK_BOX: // WH card 1
