@@ -3,15 +3,14 @@
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
-#define NB_PLAYERS         4
+#define NB_PLAYERS         4 //define maximum number of players
 #define MAX_TURNS          10 //define maximum number of turns for the game (it's also company win condition)
 
 
 //general structure for components and variables of the game
 typedef struct Game{
     Player** players; //list of current players in the game
-    Player ** Eliminated_players; //players that have been eliminated during the game for whatever reason, depending on what we do this might not be definitive
-    int nb_players; //number of total players (so we don't have to loop on both lists constantly)
+    int nb_players; //number of TOTAL players (so we don't have to loop on both lists constantly)
     int elapsed_turns; //to count current number of turns
 }Game;
 
@@ -21,16 +20,16 @@ Player* init_player(int id); //function to initialize all variables for each pla
 
 int main(int argc, char *argv[])
 {
-    printf("\n\nCette simulation se joue a 4 joueurs.\nVeuillez atribuer les identifiants 1 a 4 a chacun des joueurs.\nChaque joueur choisit une pile de carte et en pioche 3. Chaque joueur est aussi demande a piocher une carte commune.\n");
-    printf(ANSI_COLOR_RED   "Le jeu commence !!"    ANSI_COLOR_RESET);
-    printf("\n\nAfin d'initialiser le jeu, chacun des joueurs est appele a jouer une carte specifique a son role.\n\n");
+    printf("\n\nThis is simulation is played with 4 players.\nPlease attribute the ids from 1 to 4 to each player.\nEach player chooses a pile of cards and draws 3. Each player also has to draw an additional common card.\n");
+    printf(ANSI_COLOR_RED   "The game is on!!!"    ANSI_COLOR_RESET);
+    printf("\n\nTo initialize the game, each player must play a role specific card to register themselves.\n\n");
 
     Game* game;
     game = init_game(NB_PLAYERS); // Initialize the game with 4 players
     
     //to test type of players
     for(int i = 0; i<NB_PLAYERS; i++){
-        printf("player %x is of type ", i+1);
+        printf("Player n°%x is of type ", i+1);
         switch (game->players[i]->role){
             case BH:
                 printf("Black Hat\n");
@@ -39,10 +38,13 @@ int main(int argc, char *argv[])
                 printf("White Hat\n");
                 break;
             case COMPANY:
-                printf("entreprise\n");
+                printf("Company\n");
                 break;
             case EMPLOYEE:
-                printf("employe\n");
+                printf("Employee\n");
+                break;
+            default:
+                printf("ERROR! Role not recognized.\n");
                 break;
         }
         
@@ -76,40 +78,36 @@ Game* init_game(int nb_players){
     }
     game->players=players;
 
-    //allocate space for eliminated player list but it's empty for now
-    Player** eliminated_players = malloc(nb_players* sizeof(Player*));
-    game->Eliminated_players=eliminated_players;
-
     return game;
 }
 
 Player* init_player(int id){
-    printf("Veuillez rentrer le code d'une carte speciale pour le joueur numero : %x\n", id+1);
+    printf("Please input the code of a special card for the player n°%x.\n", id+1);
     int card;
     scanf("%x", &card);
     Player* player = create_player(card);
     
     if (player==NULL) {
-        printf("Erreur lors de l'initialisation\n");
-        printf("Le code %x ne correspond a aucune carte speciale.\n", card);
+        printf("Error during initialisation.\n");
+        printf("The code %x does not correspond to any special card.\n", card);
         return init_player(id);
     }
 
     switch(player->role){
         case BH:
-            printf("Initialisation Black Hat\n");
+            printf("Initialisation Black Hat...\n");
             return player;
         case WH:
-            printf("Initialisation White Hat\n");
+            printf("Initialisation White Hat...\n");
             return player;
         case COMPANY:
-            printf("Initialisation entreprise\n");
+            printf("Initialisation company...\n");
             return player;
         case EMPLOYEE:
-            printf("Initialisation employe\n");
+            printf("Initialisation employee...\n");
             return player;
         default:
-            printf("Aucun role reconnu. \n");
+            printf("No role has been recognized.\n");
             return NULL;
     }
     
