@@ -18,7 +18,7 @@ Player* BH_create_player() //Create a player with the BH role
     BH_player->played_card = NULL; // Initialize played_card to NULL
     BH_player->place = 0; // Initialize place to 0
     BH_player->message = NULL; // Initialize message tab to NULL
-
+    BH_player->Alive = ALIVE;
     return BH_player;
 }
 
@@ -26,7 +26,7 @@ Player* BH_create_player() //Create a player with the BH role
 int BH_play(Player* player, id card, char target) //Play function for BH
 {
     switch(card){
-        case CARD_COMMON: // BH card 0 AKA Common card
+        case COMMON_CARD: // BH card 0 AKA Common card
             // Implement the effect of BH Common card
             switch (player->place):
                 case PLACE_BANK:

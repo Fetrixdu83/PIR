@@ -27,7 +27,7 @@ Player* create_player(id carte)//si le format RFID est sur 32 BIT
     }
 }
 
-void play(Player* player, id card, char target)
+int play(Player* player, id card, char target)
 {
     switch(player->role)
     {
@@ -46,6 +46,7 @@ void play(Player* player, id card, char target)
         default:
             break;
     }
+    return 1;
 }
 
 void notify_broadcast(char message[255])
