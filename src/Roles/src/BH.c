@@ -26,7 +26,7 @@ Player* BH_create_player() //Create a player with the BH role
 void BH_play(Player* player, id card, char target) //Play function for BH
 {
     switch(card){
-        case 0x10: // BH card 0 AKA Common card
+        case COMMON_CARD: // BH card 0 AKA Common card
             // Implement the effect of BH Common card
             break;
         case BH_CORRUPT: // BH card 1

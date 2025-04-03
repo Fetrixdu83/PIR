@@ -25,7 +25,7 @@ Player* Employee_create_player() //Create a player with the Employee role
 void Employee_play(Player* player, id card, char target) //Play function for Employee
 {
     switch(card){
-        case 0x30: // Employee card 0 AKA Common card
+        case COMMON_CARD: // Employee card 0 AKA Common card
             // Implement the effect of Employee Common card
             break;
         case EM_OPEN_MAIL: // Employee card 1
@@ -34,7 +34,7 @@ void Employee_play(Player* player, id card, char target) //Play function for Emp
         case EM_MEETING: // Employee card 2
             // Implement the effect of Employee card 2
             break;
-        case EM__PWD_TRAINING: // Employee card 3
+        case EM_PWD_TRAINING: // Employee card 3
             // Implement the effect of Employee card 3
             break;
         case EM_BREAK: // Employee card 4    

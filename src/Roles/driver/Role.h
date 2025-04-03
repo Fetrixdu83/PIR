@@ -36,7 +36,7 @@ typedef struct Player{
 #define ALIVE 1
 #define DEAD 0
 
-
+#define COMMON_CARD 0x1
 
 
 int end();
