@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     notify_broadcast("Broadcast message test");
     
     //yeah idk
-    print_message(game->players);
+    print_message(game->players, NB_PLAYERS);
     return 0;
 }
 
