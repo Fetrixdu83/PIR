@@ -13,7 +13,7 @@
 #define CO_FINANCE_WH               0x38
 
 Player* Company_create_player();
-void Company_play(Player* player, id card, char target);
+int Company_play(Player* player, id card, char target);
 int Company_end();
 
 #endif

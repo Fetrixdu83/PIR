@@ -21,7 +21,7 @@ Player* Company_create_player() //Create a player with the Company role
 }
 
 
-void Company_play(Player* player, id card, char target) //Play function for Company
+int Company_play(Player* player, id card, char target) //Play function for Company
 {
     switch(card){
         case COMMON_CARD: // Company card 0 AKA Common card
