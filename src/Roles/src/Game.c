@@ -58,6 +58,25 @@ void play_cards(Game* game){
 
 void eliminate_player(Game* game, Player* player){
     //this function should eliminate the if so selectred player from the game
+    player->Alive = ! ALIVE;
+    char* role_str;
+    switch (player->role)
+    {
+    case BH:
+        strcpy(role_str, "black hat");
+        break;
+    case WH:
+        strcpy(role_str, "white hat");
+        break;
+    case COMPANY:
+        strcpy(role_str, "company");
+        break;
+    case EMPLOYEE:
+        strcpy(role_str, "employee");
+        break;
+    }
+
+    printf("Player number %d was a %s. (S)He had %d IR.\n", (player->num)+1, role_str, player->money);
 
 }
 

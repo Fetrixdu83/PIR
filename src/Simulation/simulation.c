@@ -101,7 +101,7 @@ Player* get_eliminated_player(Game * game){
     if (id==-1){
         return NULL; //No one was eliminated
     }
-    for(int i=0; i < NB_PLAYERS; i ++){
+    for(int i=0; i < game->nb_players; i ++){
         if(game->players[i]->num==id ){
             if(game->players[i]->Alive == ALIVE){
                 return game->players[i];
