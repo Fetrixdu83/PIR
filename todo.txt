@@ -3,7 +3,7 @@ Game.c :
     -[] play_cards : card not permitted => exit or replay (line 44)
     -[] eliminate_player : todo()
 Role.c :
-    -
+    - [] make interactions of the different cards : todo()
     -
 
 Simulation.c:

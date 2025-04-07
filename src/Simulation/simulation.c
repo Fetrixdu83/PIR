@@ -15,8 +15,7 @@ int main(int argc, char *argv[])
     printf(ANSI_COLOR_RED   "The game is on!!!"    ANSI_COLOR_RESET);
     printf("\n\nTo initialize the game, each player must play a role specific card to register themselves.\n\n");
 
-    Game* game;
-    game = init_game(NB_PLAYERS); // Initialize the game with 4 players
+    Game* game = init_game(NB_PLAYERS); // Initialize the game with 4 players
     
     //to test type of players
     for(int i = 0; i<NB_PLAYERS; i++){
@@ -50,7 +49,7 @@ int main(int argc, char *argv[])
         // print the messages at the end of the tour
 
         // vote to eliminate a player
-        to_eliminate = get_eliminated_player();
+        to_eliminate = get_eliminated_player(game);
         eliminate_player(game, to_eliminate);
         end = end_game(game);
     }
@@ -91,8 +90,20 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-Player* get_eliminated_player(){
+Player* get_eliminated_player(Game * game){
     //this function should print messages to make the game master select the eliminated player
+    int id;
+    printf("Please vote for eliminating a player : \n");
+    printf("type the id of the if so eliminated player or 0 otherwise\n");
+    scanf("%d", &id);
+    id -- ;//to rebase the id to [|0-n|] 
+    switch (id){
+        case -1:
+            return NULL;
+        default:
+            // check the id is actually part of the game -> players
+            break;
+    }
     //returns null for the moment
     return NULL;
 }
