@@ -1,5 +1,5 @@
 //Include the header file
-#include "../Roles/driver/Role.h"
+#include "../Roles/driver/Game.h"
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
@@ -7,16 +7,7 @@
 #define MAX_TURNS          10 //define maximum number of turns for the game (it's also company win condition)
 
 
-//general structure for components and variables of the game
-typedef struct Game{
-    Player** players; //list of current players in the game
-    int nb_players; //number of TOTAL players (so we don't have to loop on both lists constantly)
-    int elapsed_turns; //to count current number of turns
-}Game;
 
-Game* init_game(int nb_players); //function to initialize all global variables of the game
-Player* init_player(int id); //function to initialize all variables for each player depending on their role
-void play_cards(Player** players, int nb_players); //function to play all cards in a tour
 
 int main(int argc, char *argv[])
 {
@@ -49,6 +40,9 @@ int main(int argc, char *argv[])
         }
         
     }
+    while( ! end_game(game)){
+
+    }
     play_cards (game->players, NB_PLAYERS);
 /*
 
@@ -69,70 +63,7 @@ int main(int argc, char *argv[])
 }
 
 
-void play_cards(Player** players, int nb_players){
-    Player* player;
-    int card;
-    char target;
-    
-    for(int i=0; i<nb_players; i++){
-        if(players[i]->Alive){
-            printf("May the player number %d insert the card id, his position and the target\n", i+1);
-            scanf("%x %i %c", &card, &(players[i]->place), &target );
-            printf("card: %d position  %d et target %c\n", card,players[i]->place,  target);
-            if (play(players[i], card, target)){
 
-            }else{
-                printf("The payed card is not permitted \n");
-                i--;
-            }
-        }
-    }
-}
 
-Game* init_game(int nb_players){
-    Game* game = malloc(sizeof(Game));
 
-    //start turn counter to 0 (game hasn't started yet)
-    game->elapsed_turns=0;
 
-    //create the player list
-    Player** players = malloc(nb_players*sizeof(Player*));
-    for (int i = 0; i < nb_players; i++){
-        players[i] = init_player(i);
-    }
-    game->players=players;
-
-    return game;
-}
-
-Player* init_player(int id){
-    printf("Please input the code of a special card for the player n: %x.\n", id+1);
-    int card;
-    scanf("%x", &card);
-    Player* player = create_player(card);
-    
-    if (player==NULL) {
-        printf("Error during initialisation.\n");
-        printf("The code %x does not correspond to any special card.\n", card);
-        return init_player(id);
-    }
-
-    switch(player->role){
-        case BH:
-            printf("Initialisation Black Hat...\n");
-            return player;
-        case WH:
-            printf("Initialisation White Hat...\n");
-            return player;
-        case COMPANY:
-            printf("Initialisation company...\n");
-            return player;
-        case EMPLOYEE:
-            printf("Initialisation employee...\n");
-            return player;
-        default:
-            printf("No role has been recognized.\n");
-            return NULL;
-    }
-    
-}

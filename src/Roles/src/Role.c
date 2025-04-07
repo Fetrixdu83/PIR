@@ -2,7 +2,7 @@
 
 Message* message_global = NULL; // Global message list
 
-int end()
+int end(Player** players)
 {
     return BH_end() || 
            WH_end() ||
@@ -23,6 +23,37 @@ Player* create_player(id carte)//si le format RFID est sur 32 BIT
         case EMPLOYEE:
             return Employee_create_player();
         default:
+            return NULL;
+    }
+}
+
+Player* init_player(int id){
+    printf("Please input the code of a special card for the player n: %x.\n", id+1);
+    int card;
+    scanf("%x", &card);
+    Player* player = create_player(card);
+    
+    if (player==NULL) {
+        printf("Error during initialisation.\n");
+        printf("The code %x does not correspond to any special card.\n", card);
+        return init_player(id);
+    }
+
+    switch(player->role){
+        case BH:
+            printf("Initialisation Black Hat...\n");
+            return player;
+        case WH:
+            printf("Initialisation White Hat...\n");
+            return player;
+        case COMPANY:
+            printf("Initialisation company...\n");
+            return player;
+        case EMPLOYEE:
+            printf("Initialisation employee...\n");
+            return player;
+        default:
+            printf("No role has been recognized.\n");
             return NULL;
     }
 }

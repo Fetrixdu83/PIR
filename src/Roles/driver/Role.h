@@ -39,7 +39,8 @@ typedef struct Player{
 #define COMMON_CARD 0x1
 
 
-int end();
+int end(Player** players);
+Player* init_player(int id); //function to initialize all variables for each player depending on their role
 Player* create_player(id carte);
 int play(Player* player, id card, char target);
 
