@@ -40,10 +40,31 @@ int main(int argc, char *argv[])
         }
         
     }
-    while( ! end_game(game)){
-
+    int end = 0 ; // integer that permits to play more tours
+    while( ! end ){
+        play_cards (game);
+        // print the messages at the end of the tour
+        end = end_game(game);
     }
-    play_cards (game->players, NB_PLAYERS);
+
+    switch(end){
+        case -1:
+        // a draw 
+
+            break;
+
+        case 0 :
+        // game is not finished we should not be at this point => error
+            printf("ERROR : [58] please take contact with the game devellopers informing the error id \n");
+            exit(1);
+            break;
+        default :
+        // the player with id  = end - 1 won should print winning message:
+        // should end the game too
+
+            break;
+        }
+    
 /*
 
     //to test personal messages
