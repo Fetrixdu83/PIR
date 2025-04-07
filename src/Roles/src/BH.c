@@ -12,8 +12,6 @@ Player* BH_create_player() //Create a player with the BH role
 {
     Player* BH_player = malloc(sizeof(Player));
     BH_player->role = BH;
-    BH_player->piece = 1; // Initialize piece to 0
-    BH_player->num = 1; // Initialize num to 0
     BH_player->money = 3; // Initialize money to 0
     BH_player->played_card = NULL; // Initialize played_card to NULL
     BH_player->place = 0; // Initialize place to 0

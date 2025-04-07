@@ -8,14 +8,14 @@ typedef struct Message{
 
 typedef unsigned int id;
 typedef struct Player{
-    char role;
-    id piece;
-    char num;
-    char money;
-    id* played_card;
-    id place;
-    Message* message;
-    int Alive;
+    char role; // player role
+    id piece;  // player pion  
+    char num;  // player id in the board
+    char money;// player IR
+    id* played_card;// played cards
+    id place;  // player location
+    Message* message; // saved messages
+    int Alive; // is alive 
 }Player;
 
 #include <stdio.h>

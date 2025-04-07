@@ -31,7 +31,7 @@ Player* init_player(int id){
     printf("Please input the code of a special card for the player n: %x.\n", id+1);
     int card;
     scanf("%x", &card);
-    Player* player = create_player(card);
+    Player* player = create_player(id, card);
     
     if (player==NULL) {
         printf("Error during initialisation.\n");

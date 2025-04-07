@@ -97,15 +97,25 @@ Player* get_eliminated_player(Game * game){
     printf("type the id of the if so eliminated player or 0 otherwise\n");
     scanf("%d", &id);
     id -- ;//to rebase the id to [|0-n|] 
-    switch (id){
-        case -1:
-            return NULL;
-        default:
-            // check the id is actually part of the game -> players
-            break;
+    
+    if (id==-1){
+        return NULL; //No one was eliminated
     }
-    //returns null for the moment
-    return NULL;
+    for(int i=0; i < NB_PLAYERS; i ++){
+        if(game->players[i]->num==id ){
+            if(game->players[i]->Alive == ALIVE){
+                return game->players[i];
+            }
+            else{
+                printf("Player %i is already dead !!\n");
+            }
+        }
+    }
+    printf("Please select a playing id or 0 for none\n");
+
+    // if we go this far in the code => the selected id was either not playing or out of range
+    // recall function
+    return get_eliminated_player(game);
 }
 
 

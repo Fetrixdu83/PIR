@@ -11,6 +11,8 @@ Game* init_game(int nb_players){
     Player** players = malloc(nb_players*sizeof(Player*));
     for (int i = 0; i < nb_players; i++){
         players[i] = init_player(i);
+        players[i]->num = i;
+        players[i]->piece = i;
     }
     game->players=players;
     game->nb_players = nb_players;
@@ -56,7 +58,7 @@ void play_cards(Game* game){
 
 void eliminate_player(Game* game, Player* player){
     //this function should eliminate the if so selectred player from the game
-    
+
 }
 
 
