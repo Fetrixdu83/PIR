@@ -40,10 +40,18 @@ int main(int argc, char *argv[])
         }
         
     }
-    int end = 0 ; // integer that permits to play more tours
+
+    // paly a first tour with no voting 
+    play_cards (game);
+    int end = end_game(game) ; // integer that permits to play more tours
+    Player* to_eliminate = NULL;// no one to eliminate for the moment
     while( ! end ){
         play_cards (game);
         // print the messages at the end of the tour
+
+        // vote to eliminate a player
+        to_eliminate = get_eliminated_player();
+        eliminate_player(game, to_eliminate);
         end = end_game(game);
     }
 
@@ -83,7 +91,11 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
+Player* get_eliminated_player(){
+    //this function should print messages to make the game master select the eliminated player
+    //returns null for the moment
+    return NULL;
+}
 
 
 

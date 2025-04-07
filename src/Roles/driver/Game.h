@@ -19,7 +19,7 @@ typedef struct Game{
 Game* init_game(int nb_players); //function to initialize all global variables of the game
 int end_game(Game* game); // Check the end clauses are verified
 void play_cards(Game* game); //function to play all cards in a tour
-
+void eliminate_player(Game* game, Player* player);
 
 
 #endif

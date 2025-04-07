@@ -25,6 +25,11 @@ Player* BH_create_player() //Create a player with the BH role
 
 int BH_play(Player* player, id card, char target) //Play function for BH
 {
+    /**
+     * -1 role not mentioned was detected => error
+     * 0 card played was not permitted => effect was dropped 
+     * 1 the played card was considered
+     */
     switch(card){
         case COMMON_CARD: // BH card 0 AKA Common card
             // Implement the effect of BH Common card
@@ -52,6 +57,9 @@ int BH_play(Player* player, id card, char target) //Play function for BH
             break;
         case BH_PHYSICAL_ATTACK: // BH card 8
             // Implement the effect of BH card 8
+            break;
+        default:
+            return -1;
             break;
     }
 }

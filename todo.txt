@@ -1,0 +1,11 @@
+Game.c :
+    -[] play_cards : the played card not matching the role => exit or replay (line: 33)
+    -[] play_cards : card not permitted => exit or replay (line 44)
+    -[] eliminate_player : todo()
+Role.c :
+    -
+    -
+
+Simulation.c:
+    -[] get_eliminated_player : todo()
+    -

@@ -28,14 +28,35 @@ void play_cards(Game* game){
             printf("May the player number %d insert the card id, his position and the target\n", i+1);
             scanf("%x %i %c", &card, &(game->players[i]->place), &target );
             printf("card: %d position  %d et target %c\n", card,game->players[i]->place,  target);
-            if (play(game->players[i], card, target)){
-
-            }else{
-                printf("The payed card is not permitted \n");
-                i--;
+            switch (play(game->players[i], card, target)){
+                case -2:
+                // card not matching the role of the player => error or replay to be discussed
+                    break;
+                case -1:
+                // role not mentioned was detected => error
+                    printf("ERROR : [34] please take contact with the game devellopers informing the error id \n");
+                    exit(1);
+                    break;
+                case 0:
+                // card played was not permitted => effect was dropped / or replay the card => should be discussed
+                    break;
+                case 1:
+                //the played card was considered
+                    break;
+                default :
+                // default case not recongnized 
+                    printf("ERROR : [45] please take contact with the game devellopers informing the error id \n");
+                    exit(1);
+                    break;
             }
         }
     }
+    game->elapsed_turns++;
+}
+
+void eliminate_player(Game* game, Player* player){
+    //this function should eliminate the if so selectred player from the game
+    
 }
 
 

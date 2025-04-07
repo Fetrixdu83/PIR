@@ -60,6 +60,16 @@ Player* init_player(int id){
 
 int play(Player* player, id card, char target)
 {
+    /**
+     * -2 card not matching the role of the player
+     * -1 role or card not matching this version of the game was detected => error
+     * 0 card played was not permitted => effect to be discussed
+     * 1 the played card was considered
+     */
+    if(card!=COMMON_CARD && player->role!=(card>>CARD_BITS)){
+        // card not common and does not correspond to the role of its player
+        return -2;
+    }
     switch(player->role)
     {
         case BH:
@@ -73,7 +83,6 @@ int play(Player* player, id card, char target)
         default:
             return -1;
     }
-    return 1;
 }
 
 void notify_broadcast(char message[255])
