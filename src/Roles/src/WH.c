@@ -11,8 +11,6 @@ Player* WH_create_player() //Create a player with the WH role
 {
     Player* WH_player = (Player*) malloc(sizeof(Player));
     WH_player->role = WH;
-    WH_player->piece = 2; 
-    WH_player->num = 2; 
     WH_player->money = 3; 
     WH_player->played_card = NULL; 
     WH_player->place = 0; 
@@ -22,7 +20,7 @@ Player* WH_create_player() //Create a player with the WH role
 }
 
 
-void WH_play(Player* player, id card, char target) //Play function for WH
+int WH_play(Player* player, id card, char target) //Play function for WH
 {
     switch(card){
         case COMMON_CARD: // WH card 0 AKA Common card

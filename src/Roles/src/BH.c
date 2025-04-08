@@ -12,8 +12,6 @@ Player* BH_create_player() //Create a player with the BH role
 {
     Player* BH_player = malloc(sizeof(Player));
     BH_player->role = BH;
-    BH_player->piece = 1; // Initialize piece to 0
-    BH_player->num = 1; // Initialize num to 0
     BH_player->money = 3; // Initialize money to 0
     BH_player->played_card = NULL; // Initialize played_card to NULL
     BH_player->place = 0; // Initialize place to 0
@@ -23,8 +21,13 @@ Player* BH_create_player() //Create a player with the BH role
 }
 
 
-void BH_play(Player* player, id card, char target) //Play function for BH
+int BH_play(Player* player, id card, char target) //Play function for BH
 {
+    /**
+     * -1 role not mentioned was detected => error
+     * 0 card played was not permitted => effect was dropped 
+     * 1 the played card was considered
+     */
     switch(card){
         case COMMON_CARD: // BH card 0 AKA Common card
             // Implement the effect of BH Common card
@@ -52,6 +55,9 @@ void BH_play(Player* player, id card, char target) //Play function for BH
             break;
         case BH_PHYSICAL_ATTACK: // BH card 8
             // Implement the effect of BH card 8
+            break;
+        default:
+            return -1;
             break;
     }
 }

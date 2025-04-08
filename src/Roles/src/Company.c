@@ -10,8 +10,6 @@ Player* Company_create_player() //Create a player with the Company role
 {
     Player* Company_player = (Player*) malloc(sizeof(Player));
     Company_player->role = COMPANY;
-    Company_player->piece = 3; 
-    Company_player->num = 3; 
     Company_player->money = 6; 
     Company_player->played_card = NULL; 
     Company_player->place = 0; 
@@ -21,7 +19,7 @@ Player* Company_create_player() //Create a player with the Company role
 }
 
 
-void Company_play(Player* player, id card, char target) //Play function for Company
+int Company_play(Player* player, id card, char target) //Play function for Company
 {
     switch(card){
         case COMMON_CARD: // Company card 0 AKA Common card
