@@ -2,7 +2,7 @@
 
 Message* message_global = NULL; // Global message list
 
-int end()
+int end(Player** players)
 {
     return BH_end() || 
            WH_end() ||
@@ -27,26 +27,62 @@ Player* create_player(id carte)//si le format RFID est sur 32 BIT
     }
 }
 
+Player* init_player(int id){
+    printf("Please input the code of a special card for the player n: %x.\n", id+1);
+    int card;
+    scanf("%x", &card);
+    Player* player = create_player(id, card);
+    
+    if (player==NULL) {
+        printf("Error during initialisation.\n");
+        printf("The code %x does not correspond to any special card.\n", card);
+        return init_player(id);
+    }
+
+    switch(player->role){
+        case BH:
+            printf("Initialisation Black Hat...\n");
+            return player;
+        case WH:
+            printf("Initialisation White Hat...\n");
+            return player;
+        case COMPANY:
+            printf("Initialisation company...\n");
+            return player;
+        case EMPLOYEE:
+            printf("Initialisation employee...\n");
+            return player;
+        default:
+            printf("No role has been recognized.\n");
+            return NULL;
+    }
+}
+
 int play(Player* player, id card, char target)
 {
+    /**
+     * -2 card not matching the role of the player
+     * -1 role or card not matching this version of the game was detected => error
+     * 0 card played was not permitted => effect to be discussed
+     * 1 the played card was considered
+     */
+    if(card!=COMMON_CARD && player->role!=(card>>CARD_BITS)){
+        // card not common and does not correspond to the role of its player
+        return -2;
+    }
     switch(player->role)
     {
         case BH:
-            BH_play(player, card, target);
-            break;
+            return BH_play(player, card, target);
         case WH:
-            WH_play(player, card, target);
-            break;
+            return WH_play(player, card, target);
         case COMPANY:
-            Company_play(player, card, target);
-            break;
+            return Company_play(player, card, target);
         case EMPLOYEE:
-            Employee_play(player, card, target);
-            break;
+            return Employee_play(player, card, target);
         default:
-            break;
+            return -1;
     }
-    return 1;
 }
 
 void notify_broadcast(char message[255])

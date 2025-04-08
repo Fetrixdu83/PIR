@@ -8,14 +8,14 @@ typedef struct Message{
 
 typedef unsigned int id;
 typedef struct Player{
-    char role;
-    id piece;
-    char num;
-    char money;
-    id* played_card;
-    id place;
-    Message* message;
-    int Alive;
+    char role; // player role
+    id piece;  // player pion  
+    char num;  // player id in the board
+    char money;// player IR
+    id* played_card;// played cards
+    id place;  // player location
+    Message* message; // saved messages
+    int Alive; // is alive 
 }Player;
 
 #include <stdio.h>
@@ -45,7 +45,8 @@ typedef struct Player{
 #define COMMON_CARD 0x1
 
 
-int end();
+int end(Player** players);
+Player* init_player(int id); //function to initialize all variables for each player depending on their role
 Player* create_player(id carte);
 int play(Player* player, id card, char target);
 

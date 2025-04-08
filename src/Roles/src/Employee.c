@@ -11,8 +11,6 @@ Player* Employee_create_player() //Create a player with the Employee role
 {
     Player* Employee_player = (Player*) malloc(sizeof(Player));
     Employee_player->role = EMPLOYEE;
-    Employee_player->piece = 4; 
-    Employee_player->num = 4; 
     Employee_player->money = 3; 
     Employee_player->played_card = NULL; 
     Employee_player->place = 0; 
@@ -22,7 +20,7 @@ Player* Employee_create_player() //Create a player with the Employee role
 }
 
 
-void Employee_play(Player* player, id card, char target) //Play function for Employee
+int Employee_play(Player* player, id card, char target) //Play function for Employee
 {
     switch(card){
         case COMMON_CARD: // Employee card 0 AKA Common card

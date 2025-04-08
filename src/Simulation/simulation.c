@@ -1,5 +1,5 @@
 //Include the header file
-#include "../Roles/driver/Role.h"
+#include "../Roles/driver/Game.h"
 
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
@@ -7,16 +7,7 @@
 #define MAX_TURNS          10 //define maximum number of turns for the game (it's also company win condition)
 
 
-//general structure for components and variables of the game
-typedef struct Game{
-    Player** players; //list of current players in the game
-    int nb_players; //number of TOTAL players (so we don't have to loop on both lists constantly)
-    int elapsed_turns; //to count current number of turns
-}Game;
 
-Game* init_game(int nb_players); //function to initialize all global variables of the game
-Player* init_player(int id); //function to initialize all variables for each player depending on their role
-void play_cards(Player** players, int nb_players); //function to play all cards in a tour
 
 int main(int argc, char *argv[])
 {
@@ -24,8 +15,7 @@ int main(int argc, char *argv[])
     printf(ANSI_COLOR_RED   "The game is on!!!"    ANSI_COLOR_RESET);
     printf("\n\nTo initialize the game, each player must play a role specific card to register themselves.\n\n");
 
-    Game* game;
-    game = init_game(NB_PLAYERS); // Initialize the game with 4 players
+    Game* game = init_game(NB_PLAYERS); // Initialize the game with 4 players
     
     //to test type of players
     for(int i = 0; i<NB_PLAYERS; i++){
@@ -47,9 +37,41 @@ int main(int argc, char *argv[])
                 printf("ERROR! Role not recognized.\n");
                 break;
         }
-        play_cards (game->players, NB_PLAYERS);
-
+        
     }
+
+    // paly a first tour with no voting 
+    play_cards (game);
+    int end = end_game(game) ; // integer that permits to play more tours
+    Player* to_eliminate = NULL;// no one to eliminate for the moment
+    while( ! end ){
+        play_cards (game);
+        // print the messages at the end of the tour
+
+        // vote to eliminate a player
+        to_eliminate = get_eliminated_player(game);
+        eliminate_player(game, to_eliminate);
+        end = end_game(game);
+    }
+
+    switch(end){
+        case -1:
+        // a draw 
+
+            break;
+
+        case 0 :
+        // game is not finished we should not be at this point => error
+            printf("ERROR : [58] please take contact with the game devellopers informing the error id \n");
+            exit(1);
+            break;
+        default :
+        // the player with id  = end - 1 won should print winning message:
+        // should end the game too
+
+            break;
+        }
+    
 /*
 
     //to test personal messages
@@ -68,71 +90,34 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-
-void play_cards(Player** players, int nb_players){
-    Player* player;
-    int card;
-    char target;
+Player* get_eliminated_player(Game * game){
+    //this function should print messages to make the game master select the eliminated player
+    int id;
+    printf("Please vote for eliminating a player : \n");
+    printf("type the id of the if so eliminated player or 0 otherwise\n");
+    scanf("%d", &id);
+    id -- ;//to rebase the id to [|0-n|] 
     
-    for(int i=0; i<nb_players; i++){
-        if(players[i]->Alive){
-            printf("May the player number %d insert the card id and the target\n", i+1);
-            scanf("%x %c", &card, &target );
-            printf("card: %d et target %c\n", card, target);
-            /*if (play(players[i], card, target)){
-
-            }else{
-                printf("The payed card is not permitted \n");
-                i--;
-            }*/
+    if (id==-1){
+        return NULL; //No one was eliminated
+    }
+    for(int i=0; i < game->nb_players; i ++){
+        if(game->players[i]->num==id ){
+            if(game->players[i]->Alive == ALIVE){
+                return game->players[i];
+            }
+            else{
+                printf("Player %i is already dead !!\n");
+            }
         }
     }
+    printf("Please select a playing id or 0 for none\n");
+
+    // if we go this far in the code => the selected id was either not playing or out of range
+    // recall function
+    return get_eliminated_player(game);
 }
 
-Game* init_game(int nb_players){
-    Game* game = malloc(sizeof(Game));
 
-    //start turn counter to 0 (game hasn't started yet)
-    game->elapsed_turns=0;
 
-    //create the player list
-    Player** players = malloc(nb_players*sizeof(Player*));
-    for (int i = 0; i < nb_players; i++){
-        players[i] = init_player(i);
-    }
-    game->players=players;
 
-    return game;
-}
-
-Player* init_player(int id){
-    printf("Please input the code of a special card for the player n°%x.\n", id+1);
-    int card;
-    scanf("%x", &card);
-    Player* player = create_player(card);
-    
-    if (player==NULL) {
-        printf("Error during initialisation.\n");
-        printf("The code %x does not correspond to any special card.\n", card);
-        return init_player(id);
-    }
-
-    switch(player->role){
-        case BH:
-            printf("Initialisation Black Hat...\n");
-            return player;
-        case WH:
-            printf("Initialisation White Hat...\n");
-            return player;
-        case COMPANY:
-            printf("Initialisation company...\n");
-            return player;
-        case EMPLOYEE:
-            printf("Initialisation employee...\n");
-            return player;
-        default:
-            printf("No role has been recognized.\n");
-            return NULL;
-    }
-    
-}
