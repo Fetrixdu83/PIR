@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
         // vote to eliminate a player
         to_eliminate = get_eliminated_player(game);
         eliminate_player(game, to_eliminate);
+        
         end = end_game(game);
     }
 
