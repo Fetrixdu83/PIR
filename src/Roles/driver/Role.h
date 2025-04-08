@@ -31,7 +31,6 @@ typedef struct Player{
 #define COMPANY 3
 #define EMPLOYEE 4
 
-#define CARD_COMMON 0x0001000
 #define CARD_BITS 4
 
 #define PLACE_ENTREPRISE 0
