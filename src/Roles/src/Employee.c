@@ -20,7 +20,7 @@ Player* Employee_create_player() //Create a player with the Employee role
 }
 
 
-int Employee_play(Player* player, id card, char target) //Play function for Employee
+int Employee_play(Player* player, id card, Player* target) //Play function for Employee
 {
     switch(card){
         case COMMON_CARD: // Employee card 0 AKA Common card

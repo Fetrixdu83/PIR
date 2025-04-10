@@ -1,5 +1,5 @@
 #include "../driver/Game.h"
-
+#include "../driver/Role.h"
 
 Game* init_game(int nb_players){
     Game* game = malloc(sizeof(Game));
@@ -13,6 +13,7 @@ Game* init_game(int nb_players){
         players[i] = init_player(i);
         players[i]->num = i;
         players[i]->piece = i;
+        players[i]->Frozen = 0; // Initialize Frozen to 0 (not frozen)
     }
     game->players=players;
     game->nb_players = nb_players;
@@ -26,11 +27,11 @@ void play_cards(Game* game){
     char target;
     
     for(int i=0; i<game->nb_players; i++){
-        if(game->players[i]->Alive){
+        if(game->players[i]->Alive && game->players[i]->Frozen == 0){
             printf("May the player number %d insert the card id, his position and the target\n", i+1);
             scanf("%x %i %c", &card, &(game->players[i]->place), &target );
             printf("card: %d position  %d et target %c\n", card,game->players[i]->place,  target);
-            switch (play(game->players[i], card, target)){
+            switch (play(game->players[i], card, game->players[target - 1], game->elapsed_turns)){
                 case -2:
                 // card not matching the role of the player => error or replay to be discussed
                     break;
@@ -45,12 +46,24 @@ void play_cards(Game* game){
                 case 1:
                 //the played card was considered
                     break;
+                case 11:
+                    // card played was considered and a message need to be sent to all players
+                    // Notify all players about the broadcast message
+                    notify_broadcast("Broadcast message:  a force brutale has been conducted.\n");
+                    break;
                 default :
                 // default case not recongnized 
                     printf("ERROR : [45] please take contact with the game devellopers informing the error id \n");
                     exit(1);
                     break;
             }
+        
+        }
+        if(game->players[i]->Alive && game->players[i]->Frozen != 0){
+            // Player is frozen, so they cannot play a card this turn
+            game->players[i]->Frozen -=1; // decrease the frozen counter
+            // Notify the player that they are frozen  
+            printf("Player number %d is frozen and cannot play a card this turn.\n", i+1);
         }
     }
     game->elapsed_turns++;

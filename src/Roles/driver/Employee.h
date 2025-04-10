@@ -13,7 +13,7 @@
 #define EM_BACKDOOR                 0x48
 
 Player* Employee_create_player();
-int Employee_play(Player* player, id card, char target);
+int Employee_play(Player* player, id card, Player* target);
 int Employee_end();
 
 #endif

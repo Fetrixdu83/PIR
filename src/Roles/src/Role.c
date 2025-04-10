@@ -58,7 +58,7 @@ Player* init_player(int id){
     }
 }
 
-int play(Player* player, id card, char target)
+int play(Player* player, id card, Player* target,int current_round) // Play function for all players
 {
     /**
      * -2 card not matching the role of the player
@@ -73,7 +73,7 @@ int play(Player* player, id card, char target)
     switch(player->role)
     {
         case BH:
-            return BH_play(player, card, target);
+            return BH_play(player, card, target,current_round);
         case WH:
             return WH_play(player, card, target);
         case COMPANY:
