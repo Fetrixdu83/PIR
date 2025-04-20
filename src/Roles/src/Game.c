@@ -23,13 +23,13 @@ Game* init_game(int nb_players){
 
 void play_cards(Game* game){
     int card;
-    char target;
+    int target;
     
     for(int i=0; i<game->nb_players; i++){
         if(game->players[i]->Alive && game->players[i]->Frozen == 0){
             printf("May the player number %d insert the card id, his position and the target\n", i+1);
-            scanf("%x %i %c", &card, &(game->players[i]->place), &target );
-            printf("card: %x position  %d et target %c\n", card, game->players[i]->place,  target);
+            scanf("%x %i %d", &card, &(game->players[i]->place), &target );
+            printf("card: %x position  %d et target %d\n", card, game->players[i]->place,  target);
             switch (play(game->players[i], card, game->players[target - 1], game->elapsed_turns-1)){
                 case FAILURE_CARD_NOT_MATCHING_PLAYER:
                 // card not matching the role of the player => error or replay to be discussed

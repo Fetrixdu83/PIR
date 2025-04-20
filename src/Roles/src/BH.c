@@ -57,7 +57,7 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             // Implement the effect of BH card 1
             if(player->money >= 2){
                 player->money -= 2; 
-                notify_player(target, "Are you interested in some big deals? Enroll in the BH team!");
+                notify_player(target, "Are you interested in some big deals? Enroll in the BH team!\n");
                 return SUCCESS; // Card played successfully
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the car

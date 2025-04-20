@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     
     //to test type of players
     for(int i = 0; i<NB_PLAYERS; i++){
-        printf("Player n°%x is of type ", i+1);
+        printf("Player n: %x is of type ", i+1);
         switch (game->players[i]->role){
             case BH:
                 printf("Black Hat\n");
