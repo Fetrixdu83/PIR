@@ -1,8 +1,9 @@
 #include "../driver/Role.h"
 #include "../driver/BH.h"
 
-int Last_played_botnet=-1;
-int Nb_botnet =0;
+int Last_played_botnet = -1;
+int Nb_botnet = 0;
+int phishing = 0;
 
 int BH_end() // Win condition of BH
 {
@@ -106,12 +107,12 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
                     notify_player(player, "You are making a brute force attack, there might be a result in some tours.\n");
                 }else{
                     player->Frozen += 2; // Freeze the player for 2 turns if the company is not protected
-                    Company_player->money -=10;
+                    Company_player->money -=(int)round(10 * (1+betray/3));
                     player->money+=10;
                     notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
                     notify_player(player, "You are making a brute force attack, there is no defense, you are going to win 10 IR.\n");
                 }
-                notify_broadcast("The company is being attacked by a brute force. This attack may slow down its functionning which may lead to a money loss\n")
+                notify_broadcast("The company is being attacked by a brute force. This attack may slow down its functionning which may lead to a money loss\n");
                 
                 return SUCCESS_BROADCAST; // Card played successfully
             }else if(current_round == 1){
@@ -125,7 +126,7 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             if(player->money >= 2){
                 player->money -= 2; 
                 notify_player(target, "Hello Sir, \nFor your account security, please update your password regularly, \nplease click on the following link and change your password, thank you for your cooperation.\n https://www.google.com/search?q=phishing+attack+link&rlz=1C1GCEU_enFR1010FR1010&oq=phishing+attack+link&aqs=chrome..69i57j0i512l9.10345j0j7&sourceid=chrome&ie=UTF-8\n");
-                
+                phishing  = 1;
                 //il manque du mecanisme pour verifier la reussite de l'attaque
                 
                 return SUCCESS; // Card played successfully
@@ -137,10 +138,10 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             // Implement the effect of BH card 6
             if(player->money >= 3){
                 player->money -= 3; 
-                if(target->protectd == 1){
-                    player->money += 2;// Gain 2 money if the target is protected
+                if(target==Company_player && secured){
+                    player->money += 2;// Gain 2 money if the Company is protected
                 }else{
-                    player->money += 3; // Gain 3 money if the target is not protected
+                    player->money += 3; // Gain 3 money if the Company is not protected
                 }
                 return SUCCESS; // Card played successfully
             }else{
@@ -151,12 +152,12 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             // Implement the effect of BH card 7
             if(player->money >= 4){
                 player->money -= 4; 
-                if(target->protectd == 1){
+                if(target==Company_player && secured){
                     player->money += 3;// Gain 2 money if the target is protected
-                    Company_player->money -=3;
+                    Company_player->money -= (int)round(3 * (1+betray/3));
                 }else{
                     player->money += 6; // Gain 3 money if the target is not protected
-                    Company_player->money -=6;
+                    Company_player->money -=(int)round(6 * (1+betray/3));
                 }
                 notify_player(Company_player, "You were attacked by an XSS attack !! \n");
                 return SUCCESS; 
@@ -171,7 +172,7 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
                     if(!secured){
                         notify_broadcast("The company went through a physical attack !! The servers were harmed. The company will suffer from this attack for a tour.\n");
                         Company_player->Frozen += 1;
-                        Company_player->money-=3;
+                        Company_player->money-=(int)round(3 * (1+betray/3));;
                     }
                     else{
                         notify_player(player, "The company has already secured all of its entries. You should try attacking virtually ;) \n");

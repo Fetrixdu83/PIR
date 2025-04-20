@@ -14,6 +14,7 @@
 
 extern int Last_played_botnet;
 extern int Nb_botnet;
+extern int phishing;
 
 Player* BH_create_player();
 int BH_play(Player* player, id card, Player* target,int current_round); // Play function for BH

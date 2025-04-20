@@ -22,7 +22,6 @@ Player* Company_create_player() //Create a player with the Company role
     Company_player->place = 0; 
     Company_player->message = NULL; // Initialize message tab to NULL
     Company_player->Alive = ALIVE;
-    Company_player->protectd = 0; // Initialize protectd to 0 (not protected)
     return Company_player;
 }
 
@@ -90,7 +89,7 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
             }
         case CO_FIREWALL: // Company card 1
             if (player->money>=6){
-                player->money -= 6;
+                player->money -= (int)round(6 * (1+betray/3));;
                 firewall_activated = 1;
                 return SUCCESS;
             }
@@ -116,7 +115,7 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
         case CO_SECURE_BUILDING: // Company card 3
             if (player->money>=5){
                 if (player->place == PLACE_COMPANY){
-                    player->money-=5;
+                    player->money-=(int)round(5 * (1+betray/3));
                     secured = 1;
                     return SUCCESS;
                 }
@@ -130,7 +129,7 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
         case CO_CONFERENCE: // Company card 4    
             if (player->money>=2){
                 notify_broadcast("All players should show up at the company next tour! 🥁ThCon is having place🥁\n ");
-                player->money-=2;
+                player->money-=(int)round(2 * (1+betray/3));
                 return SUCCESS;
             }
             else return FAILURE_NOT_ENOUGH_MONEY;
@@ -145,7 +144,7 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
             break;
         case CO_PROMOTE_EM: // Company card 7    
             if (player->money>=6){
-                player->money-=6;
+                player->money-=(int)round(6 * (1+betray/3));
                 promote_employees(4);
                 return SUCCESS;
             }
@@ -154,7 +153,7 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
             }
         case CO_FINANCE_WH: // Company card 8
             if (player->money>=6){
-                player->money-=6;
+                player->money-=(int)round(6 * (1+betray/3));
                 finance_WH(4);
                 return SUCCESS;
             }
