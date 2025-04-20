@@ -7,6 +7,7 @@ int prepare_action = 0; // this int represents the number of tour the action sel
 int secured = 0; // initially the company did not secure the physical access to its buildings
 Player* employees[2] = {NULL, NULL};
 Player* white_hat = NULL;
+Player* Company_player = NULL;
 
 int Company_end() //Win condition of Company
 {
@@ -15,7 +16,7 @@ int Company_end() //Win condition of Company
 
 Player* Company_create_player() //Create a player with the Company role
 {
-    Player* Company_player = (Player*) malloc(sizeof(Player));
+    Company_player = (Player*) malloc(sizeof(Player));
     Company_player->role = COMPANY;
     Company_player->money = 6; 
     Company_player->played_card = NULL; 

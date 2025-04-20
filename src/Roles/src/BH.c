@@ -35,10 +35,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 case PLACE_BANK:
                     player->money += 3; // Gain 3 money
                     return SUCCESS; // Card played successfully
-                    break;
-                case PLACE_CYPERCAFE:
-                    return FAILURE_WRONG_PLACE; // Card played in a wrong place
-                    break;
+
                 case PLACE_LIBRARY:
                     if(player->money >= 2){ // Check if player has enough money
                         player->money -= 2; // Lose 2 money
@@ -47,12 +44,11 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                     else{
                         return FAILURE_NOT_ENOUGH_MONEY; 
                     }
-                    break;
-                case PLACE_COMPANY:
+
+                default:
                     return FAILURE_WRONG_PLACE; 
-                    break;
             }
-            break;
+
         case BH_CORRUPT: // BH card 1
             // Implement the effect of BH card 1
             if(player->money >= 2){
@@ -63,7 +59,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
             
             }    
-            break; 
+
         case BH_BOTNET: // BH card 2
             // Implement the effect of BH card 2
             if(player->money >= 1){
@@ -73,7 +69,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
             
             } 
-            break;
+
         case BH_DDoS: // BH card 3
             // Implement the effect of BH card 3
             if(player->money >= 1){
@@ -81,9 +77,8 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 return SUCCESS; // Card played successfully
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
-            
             } 
-            break; 
+
         case BH_BRUTE_FORCE: // BH card 4    
             // Implement the effect of BH card 4
             if(player->money >= 1){
@@ -91,9 +86,8 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 return SUCCESS; // Card played successfully
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
-            
             } 
-            break;
+
         case BH_PHISHING: // BH card 5
             // Implement the effect of BH card 5
             if(player->money >= 2){
@@ -101,9 +95,8 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 return SUCCESS; // Card played successfully
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
-            
             } 
-            break;    
+
         case BH_SQL_INJECTION: // BH card 6    
             // Implement the effect of BH card 6
             if(player->money >= 3){
@@ -111,9 +104,8 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 return SUCCESS; // Card played successfully
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
-            
             } 
-            break;   
+
         case BH_XSS: // BH card 7    
             // Implement the effect of BH card 7
             if(player->money >= 4){
@@ -121,21 +113,31 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                 return SUCCESS; // Card played successfully
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
-            
             } 
-            break;
+
         case BH_PHYSICAL_ATTACK: // BH card 8
-            // Implement the effect of BH card 8
             if(player->money >= 3){
-                player->money -= 3; 
-                return SUCCESS; // Card played successfully
+                if(player->place == PLACE_COMPANY){
+                    player->money -= 3; 
+                    if(!secured){
+                        notify_broadcast("The company went through a physical attack !! The servers were harmed. The company will suffer from this attack for a tour.\n");
+                        prepare_action += 1;
+                        Company_player->money-=3;
+                    }
+                    else{
+                        notify_player(player, "The company has already secured all of its entries. You should try attacking virtually ;) \n");
+                    }
+                    return SUCCESS; // Card played successfully
+                }
+                else{
+                    return FAILURE_WRONG_PLACE;
+                }
+                
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
             
             } 
-            break;
         default:
-            return -1;
-            break;
+            return FAILURE_CARD_NOT_PERMITTED;
     }
 }

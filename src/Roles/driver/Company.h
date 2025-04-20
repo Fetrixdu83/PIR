@@ -22,6 +22,7 @@ void finance_WH(int ir);
 
 extern Player* employees[2];
 extern Player* white_hat;
+extern Player* Company_player;
 
 extern int firewall_activated;
 extern int backup;
