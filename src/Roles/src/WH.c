@@ -20,7 +20,7 @@ Player* WH_create_player() //Create a player with the WH role
 }
 
 
-int WH_play(Player* player, id card, char target) //Play function for WH
+int WH_play(Player* player, id card, Player* target) //Play function for WH
 {
     return NOT_IMPLEMENTED_YET;
     switch(card){

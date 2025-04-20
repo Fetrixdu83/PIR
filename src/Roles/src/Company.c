@@ -23,6 +23,7 @@ Player* Company_create_player() //Create a player with the Company role
     Company_player->place = 0; 
     Company_player->message = NULL; // Initialize message tab to NULL
     Company_player->Alive = ALIVE;
+    Company_player->protectd = 0; // Initialize protectd to 0 (not protected)
     return Company_player;
 }
 
@@ -60,7 +61,7 @@ void finance_WH(int ir){
 
 
 
-int Company_play(Player* player, id card, char target) //Play function for Company
+int Company_play(Player* player, id card, Player* target) //Play function for Company
 {
     if (prepare_action){
         prepare_action-=1;

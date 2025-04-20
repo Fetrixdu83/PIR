@@ -16,6 +16,8 @@ typedef struct Player{
     id place;  // player location
     Message* message; // saved messages
     int Alive; // is alive 
+    char Frozen; // is frozen for the next round
+    char protectd;// only for the company => 1 if protected, 0 if not
 }Player;
 
 #include <stdio.h>
@@ -42,6 +44,7 @@ typedef struct Player{
 #define FAILURE_CARD_NOT_MATCHING_GAME_VERSION -1
 #define FAILURE_CARD_NOT_PERMITTED 0
 #define SUCCESS 1
+#define SUCCESS_BROADCAST 11
 #define FAILURE_WRONG_PLACE 2
 #define FAILURE_NOT_ENOUGH_MONEY 3
 #define NOT_IMPLEMENTED_YET 4
@@ -55,7 +58,7 @@ typedef struct Player{
 int end(Player** players);
 Player* init_player(int id); //function to initialize all variables for each player depending on their role
 Player* create_player(id carte);
-int play(Player* player, id card, char target);
+int play(Player* player, id card, Player* target,int current_round); // Play function for all players
 
 //Add an element to the message tab of the player
 void notify_player(Player* player, char message[255]);// Tab of message of 255 char max
