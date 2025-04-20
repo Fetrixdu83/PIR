@@ -6,6 +6,7 @@
 #define NB_PLAYERS         4 //define maximum number of players
 #define MAX_TURNS          10 //define maximum number of turns for the game (it's also company win condition)
 
+Player* get_eliminated_player(Game * game);
 
 
 
@@ -108,7 +109,7 @@ Player* get_eliminated_player(Game * game){
                 return game->players[i];
             }
             else{
-                printf("Player %i is already dead !!\n");
+                printf("Player %d is already dead !!\n", i);
             }
         }
     }

@@ -31,7 +31,7 @@ int BH_play(Player* player, id card, char target) //Play function for BH
     switch(card){
         case COMMON_CARD: // BH card 0 AKA Common card
             // Implement the effect of BH Common card
-            switch (player->place):
+            switch (player->place){
                 case PLACE_BANK:
                     player->money += 3; // Gain 3 money
                     return SUCCESS; // Card played successfully
@@ -40,15 +40,18 @@ int BH_play(Player* player, id card, char target) //Play function for BH
                     return FAILURE_WRONG_PLACE; // Card played in a wrong place
                     break;
                 case PLACE_LIBRARY:
-                    if(player->money >= 2) // Check if player has enough money
+                    if(player->money >= 2){ // Check if player has enough money
                         player->money -= 2; // Lose 2 money
                         return SUCCESS; // Card played successfully
-                    else
+                    }
+                    else{
                         return FAILURE_NOT_ENOUGH_MONEY; 
+                    }
                     break;
-                case PLACE_ENTREPRISE:
+                case PLACE_COMPANY:
                     return FAILURE_WRONG_PLACE; 
                     break;
+            }
             break;
         case BH_CORRUPT: // BH card 1
             // Implement the effect of BH card 1

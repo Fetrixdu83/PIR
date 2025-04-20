@@ -29,25 +29,36 @@ void play_cards(Game* game){
         if(game->players[i]->Alive){
             printf("May the player number %d insert the card id, his position and the target\n", i+1);
             scanf("%x %i %c", &card, &(game->players[i]->place), &target );
-            printf("card: %d position  %d et target %c\n", card,game->players[i]->place,  target);
-            switch (play(game->players[i], card, target)){
-                case -2:
+            printf("card: %x position  %d et target %c\n", card, game->players[i]->place,  target);
+            switch (play(game->players[i], card, target-1)){
+                case FAILURE_CARD_NOT_MATCHING_PLAYER:
                 // card not matching the role of the player => error or replay to be discussed
+                    printf("\n\n player not matching the card to be discussed\n\n");
                     break;
-                case -1:
+                case FAILURE_CARD_NOT_MATCHING_GAME_VERSION:
                 // role not mentioned was detected => error
-                    printf("ERROR : [34] please take contact with the game devellopers informing the error id \n");
+                    printf("ERROR : [40] please take contact with the game devellopers informing the error id \n");
                     exit(1);
                     break;
-                case 0:
-                // card played was not permitted => effect was dropped / or replay the card => should be discussed
+                case FAILURE_NOT_ENOUGH_MONEY:
+                // card played requests more money => effect was dropped 
+                    printf("\n\nThis card requests more money than what the player owns => dropped\n\n");
                     break;
-                case 1:
+                case FAILURE_WRONG_PLACE:
+                // card played request player to be at a place where he is not => effect was drpped
+                    printf("\n\nThis card requests the player to be at a certain place => dropped\n\n");
+
+                    break;
+                
+                case SUCCESS:
                 //the played card was considered
+                    break;
+                case NOT_IMPLEMENTED_YET:
+                    printf("not implemented yet\n");
                     break;
                 default :
                 // default case not recongnized 
-                    printf("ERROR : [45] please take contact with the game devellopers informing the error id \n");
+                    printf("ERROR : [58] please take contact with the game devellopers informing the error id \n");
                     exit(1);
                     break;
             }
@@ -57,28 +68,28 @@ void play_cards(Game* game){
 }
 
 void eliminate_player(Game* game, Player* player){
-    //this function should eliminate the if so selectred player from the game
-    player->Alive = ! ALIVE;
-    char* role_str;
+    player->Alive = !ALIVE;
+    const char* role_str = "";  // <-- initialize properly
+
     switch (player->role)
     {
     case BH:
-        strcpy(role_str, "black hat");
+        role_str = " black hat";
         break;
     case WH:
-        strcpy(role_str, "white hat");
+        role_str = " white hat";
         break;
     case COMPANY:
-        strcpy(role_str, "company");
+        role_str = " company";
         break;
     case EMPLOYEE:
-        strcpy(role_str, "employee");
+        role_str = "n employee";
         break;
     }
 
-    printf("Player number %d was a %s. (S)He had %d IR.\n", (player->num)+1, role_str, player->money);
-
+    printf("Player number %d was a%s. (S)He had %d IR.\n", (player->num)+1, role_str, player->money);
 }
+
 
 
 int end_game(Game* game){

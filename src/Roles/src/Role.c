@@ -17,11 +17,15 @@ Player* create_player(id carte)//si le format RFID est sur 32 BIT
         case BH:
             return BH_create_player();
         case WH:
-            return WH_create_player();
+            Player* wh = WH_create_player();
+            save_WH_id(wh);
+            return wh;
         case COMPANY:
             return Company_create_player();
         case EMPLOYEE:
-            return Employee_create_player();
+            Player* employee = Employee_create_player();
+            company_add_employee(employee);
+            return employee;
         default:
             return NULL;
     }
@@ -31,7 +35,8 @@ Player* init_player(int id){
     printf("Please input the code of a special card for the player n: %x.\n", id+1);
     int card;
     scanf("%x", &card);
-    Player* player = create_player(id, card);
+    Player* player = create_player(card);
+    player->num = id;
     
     if (player==NULL) {
         printf("Error during initialisation.\n");
@@ -65,10 +70,12 @@ int play(Player* player, id card, char target)
      * -1 role or card not matching this version of the game was detected => error
      * 0 card played was not permitted => effect to be discussed
      * 1 the played card was considered
+     * 2 card cannot be played at this place
+     * 3 player does not have enough money
      */
     if(card!=COMMON_CARD && player->role!=(card>>CARD_BITS)){
         // card not common and does not correspond to the role of its player
-        return -2;
+        return FAILURE_CARD_NOT_MATCHING_PLAYER;
     }
     switch(player->role)
     {
@@ -81,7 +88,7 @@ int play(Player* player, id card, char target)
         case EMPLOYEE:
             return Employee_play(player, card, target);
         default:
-            return -1;
+            return FAILURE_CARD_NOT_MATCHING_GAME_VERSION;
     }
 }
 

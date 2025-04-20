@@ -22,6 +22,7 @@ Player* Employee_create_player() //Create a player with the Employee role
 
 int Employee_play(Player* player, id card, char target) //Play function for Employee
 {
+    return NOT_IMPLEMENTED_YET;
     switch(card){
         case COMMON_CARD: // Employee card 0 AKA Common card
             // Implement the effect of Employee Common card
