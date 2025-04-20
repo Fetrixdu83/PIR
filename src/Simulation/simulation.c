@@ -48,7 +48,11 @@ int main(int argc, char *argv[])
     while( ! end ){
         play_cards (game);
         // print the messages at the end of the tour
+        printf(ANSI_COLOR_RED       "Global messages:\n"        ANSI_COLOR_RESET);
 
+        print_global_messages();
+
+        print_message(game->players, game->nb_players);
         // vote to eliminate a player
         to_eliminate = get_eliminated_player(game);
         eliminate_player(game, to_eliminate);

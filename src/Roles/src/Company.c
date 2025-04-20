@@ -67,6 +67,7 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
     if (player->Frozen){
         player->Frozen-=1;
         notify_player(player, "You cannot play this tour, action was not considered. \n");
+        return SUCCESS;
     }
     else{
         switch(card){

@@ -92,6 +92,7 @@ int Employee_play(Player *player, id card, Player *target) // Play function for 
     case EM_BREAK: // Employee card 4
         if (player->place == PLACE_COMPANY){
             rest = 1;
+            return SUCCESS;
         }else{
             return FAILURE_WRONG_PLACE;
         }
@@ -100,6 +101,7 @@ int Employee_play(Player *player, id card, Player *target) // Play function for 
             player->money -= 5 - rest;
             notify_player(player, "The effect of this card will take place in 2 tours. You are still able to play next time.\n");
             password_training = 2;
+            return SUCCESS;
         } else{
             return FAILURE_NOT_ENOUGH_MONEY;
         }
