@@ -1,6 +1,9 @@
 #include "../driver/Role.h"
 #include "../driver/BH.h"
 
+int Last_played_botnet=-1;
+int Nb_botnet =0;
+
 int BH_end() //Win condition of BH
 {
     return 0;
@@ -17,6 +20,7 @@ Player* BH_create_player() //Create a player with the BH role
     BH_player->place = 0; // Initialize place to 0
     BH_player->message = NULL; // Initialize message tab to NULL
     BH_player->Alive = ALIVE;
+    return BH_player;
 }
 
 
@@ -95,7 +99,7 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             // Implement the effect of BH card 4
             if(player->money >= 1 && current_round > 1){
                 player->money -= 1; 
-                if(taget->protectd == 1){
+                if(target->protectd == 1){
                     player->Frozen = 3;// Freeze the player for 3 turns if the company is protected
                 }else{
                     player->Frozen = 2; // Freeze the player for 2 turns if the company is not protected
@@ -105,7 +109,7 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
                 
                 return SUCCESS_BROADCAST; // Card played successfully
             }else if(current_round == 1){
-                return FAILURE_CARD_NOT_PLAYABLE; // Card not playable in the first round
+                return FAILURE_CARD_NOT_PERMITTED; // Card not playable in the first round
             }else{
                 return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
             } 
@@ -114,10 +118,7 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             // Implement the effect of BH card 5
             if(player->money >= 2){
                 player->money -= 2; 
-                notify_player(target, "Hello Sir, 
-                                        For your account security, please update your password regularly, 
-                                        please click on the following link and change your password, thank you for your cooperation.\n
-                                        https://www.google.com/search?q=phishing+attack+link&rlz=1C1GCEU_enFR1010FR1010&oq=phishing+attack+link&aqs=chrome..69i57j0i512l9.10345j0j7&sourceid=chrome&ie=UTF-8\n");
+                notify_player(target, "Hello Sir, \nFor your account security, please update your password regularly, \nplease click on the following link and change your password, thank you for your cooperation.\n https://www.google.com/search?q=phishing+attack+link&rlz=1C1GCEU_enFR1010FR1010&oq=phishing+attack+link&aqs=chrome..69i57j0i512l9.10345j0j7&sourceid=chrome&ie=UTF-8\n");
                 
                 //il manque du mecanisme pour verifier la reussite de l'attaque
                 

@@ -22,7 +22,6 @@ Game* init_game(int nb_players){
 }
 
 void play_cards(Game* game){
-    Player* player;
     int card;
     char target;
     

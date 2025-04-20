@@ -54,7 +54,10 @@ void finance_WH(int ir){
     if(white_hat!=NULL){
         if (white_hat->Alive){
             white_hat->money+=ir;
-            notify_player(white_hat, "You received a financement from the company for a value of %d IR\n", ir);
+            char buffer[128]; // create a buffer to hold the final message
+            sprintf(buffer, "You received a financement from the company for a value of %d IR\n", ir);
+            notify_player(white_hat, buffer);
+
         }
     }
 }
@@ -129,7 +132,9 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
             if (player->money>=2){
                 notify_broadcast("All players should show up at the company next tour! 🥁ThCon is having place🥁\n ");
                 player->money-=2;
+                return SUCCESS;
             }
+            else return FAILURE_NOT_ENOUGH_MONEY;
 
         case CO_UNFAIR_COMPETETION: // Company card 5
             // Implement the effect of Company card 5
