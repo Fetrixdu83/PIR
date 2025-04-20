@@ -26,7 +26,6 @@ extern Player* Company_player;
 
 extern int firewall_activated;
 extern int backup;
-extern int prepare_action; // this int represents the number of tour the action selected takes
 extern int secured; // initially the company did not secure the physical access to its buildings
 
 #endif

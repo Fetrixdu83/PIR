@@ -3,7 +3,6 @@
 
 int firewall_activated = 0;
 int backup = 0;
-int prepare_action = 0; // this int represents the number of tour the action selected takes
 int secured = 0; // initially the company did not secure the physical access to its buildings
 Player* employees[2] = {NULL, NULL};
 Player* white_hat = NULL;
@@ -66,8 +65,8 @@ void finance_WH(int ir){
 
 int Company_play(Player* player, id card, Player* target) //Play function for Company
 {
-    if (prepare_action){
-        prepare_action-=1;
+    if (player->Frozen){
+        player->Frozen-=1;
         notify_player(player, "You cannot play this tour, action was not considered. \n");
     }
     else{
@@ -106,7 +105,7 @@ int Company_play(Player* player, id card, Player* target) //Play function for Co
                     notify_player(player, "Your employee did prepare a backup. You are able to play\n");
                 }else{
                     notify_player(player, "You will not be able to play during next tour as you will be putting the backup in place\n");
-                    prepare_action = 1;
+                    player->Frozen += 1;
                 }
                 return SUCCESS;
             }

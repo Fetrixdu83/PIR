@@ -4,7 +4,7 @@
 int Last_played_botnet=-1;
 int Nb_botnet =0;
 
-int BH_end() //Win condition of BH
+int BH_end() // Win condition of BH
 {
     return 0;
 }
@@ -64,7 +64,6 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             }    
 
         case BH_BOTNET: // BH card 2
-            // Implement the effect of BH card 2
             if(player->money >= 1){
                 player->money -= 1;
                 if( Last_played_botnet != player->place){
@@ -80,13 +79,17 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             } 
 
         case BH_DDoS: // BH card 3
-            // Implement the effect of BH card 3
             if(player->money >= 1){
                 player->money -= 1; 
                 if(Nb_botnet > 0){
                     Nb_botnet--;// Decrease the number of botnets
                     notify_player(target, "You have been attacked by a DDoS attack!");
-                    target->Frozen += 1; // Freeze the target player for the next turn
+                    if (target==Company_player && backup){
+                        // the company did backup and won't be frozen
+                        notify_player(target, "You did the backup, no worries ;)\n");
+                    }else{
+                        target->Frozen += 1; // Freeze the target player for the next turn
+                    }
                 }else{
                     return FAILURE_WRONG_PLACE; // Card played in a wrong place
                 }
@@ -96,16 +99,19 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
             } 
 
         case BH_BRUTE_FORCE: // BH card 4    
-            // Implement the effect of BH card 4
             if(player->money >= 1 && current_round > 1){
                 player->money -= 1; 
-                if(target->protectd == 1){
-                    player->Frozen = 3;// Freeze the player for 3 turns if the company is protected
+                if(secured){
+                    player->Frozen += 3;// Freeze the player for 3 turns if the company is protected
+                    notify_player(player, "You are making a brute force attack, there might be a result in some tours.\n");
                 }else{
-                    player->Frozen = 2; // Freeze the player for 2 turns if the company is not protected
+                    player->Frozen += 2; // Freeze the player for 2 turns if the company is not protected
+                    Company_player->money -=10;
+                    player->money+=10;
+                    notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
+                    notify_player(player, "You are making a brute force attack, there is no defense, you are going to win 10 IR.\n");
                 }
-                
-                // il manque le mecanisme de la verification de la reussite de l'attaque
+                notify_broadcast("The company is being attacked by a brute force. This attack may slow down its functionning which may lead to a money loss\n")
                 
                 return SUCCESS_BROADCAST; // Card played successfully
             }else if(current_round == 1){
@@ -147,12 +153,15 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
                 player->money -= 4; 
                 if(target->protectd == 1){
                     player->money += 3;// Gain 2 money if the target is protected
+                    Company_player->money -=3;
                 }else{
                     player->money += 6; // Gain 3 money if the target is not protected
+                    Company_player->money -=6;
                 }
-                return SUCCESS; // Card played successfully
+                notify_player(Company_player, "You were attacked by an XSS attack !! \n");
+                return SUCCESS; 
             }else{
-                return FAILURE_NOT_ENOUGH_MONEY; // Not enough money to play the card
+                return FAILURE_NOT_ENOUGH_MONEY; 
             } 
 
         case BH_PHYSICAL_ATTACK: // BH card 8
@@ -161,7 +170,7 @@ int BH_play(Player* player, id card, Player* target,int current_round) //Play fu
                     player->money -= 3; 
                     if(!secured){
                         notify_broadcast("The company went through a physical attack !! The servers were harmed. The company will suffer from this attack for a tour.\n");
-                        prepare_action += 1;
+                        Company_player->Frozen += 1;
                         Company_player->money-=3;
                     }
                     else{

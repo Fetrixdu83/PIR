@@ -17,7 +17,6 @@ typedef struct Player{
     Message* message; // saved messages
     int Alive; // is alive 
     char Frozen; // is frozen for the next round
-    char protectd;// only for the company => 1 if protected, 0 if not
 }Player;
 
 #include <stdio.h>
