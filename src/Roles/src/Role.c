@@ -92,7 +92,7 @@ int play(Player* player, id card, Player* target,int current_round) // Play func
     }
 }
 
-void notify_broadcast(char message[255])
+void notify_broadcast(char* message)
 {
     Message* new_message = malloc(sizeof(Message));
     
@@ -100,8 +100,10 @@ void notify_broadcast(char message[255])
         printf("Memory allocation failed\n");
         return;
     }
+    new_message->message = malloc(strlen(message) + 1); // +1 for the '\0'
     strcpy(new_message->message, message);
     new_message->next = NULL;
+
     if (message_global == NULL) {
         message_global = new_message;
     }
@@ -115,12 +117,18 @@ void notify_broadcast(char message[255])
     }
 }
 
-void notify_player(Player* player, char message[255])
+void notify_player(Player* player, char* message)
 {
     Message* new_message = malloc(sizeof(Message));
     
     if (new_message == NULL) {
         printf("Memory allocation failed\n");
+        return;
+    }
+    new_message->message = malloc(strlen(message) + 1);
+    if (new_message->message == NULL) {
+        printf("Memory allocation for message failed\n");
+        free(new_message);
         return;
     }
     strcpy(new_message->message, message);
@@ -140,24 +148,43 @@ void notify_player(Player* player, char message[255])
 
 void print_message(Player** players, int nb_players)
 {
-    //print pour tout les joueurs
     for(int i = 0; i < nb_players; i++) {
         Message* current = players[i]->message;
-        printf("Messages for the  %d: ( Roles : %d) \n", players[i]->num, players[i]->role);
+        char* role = NULL;
+        switch(players[i]->role){
+            case BH:
+                strcpy(role, "Black hat");
+                break;
+            case WH:
+                strcpy(role, "White hat");
+                break;
+            case COMPANY:
+                strcpy(role, "company");
+                break;
+            case EMPLOYEE:
+                strcpy(role, "employee");
+                break;
+        }
+        printf("Messages for the  %d: ( Roles : %s) \n", players[i]->num, role);
         while (current != NULL){
             Message* to_free = current; // Store the message to free later
             printf("%s\n", current->message);
             current = current->next;
+            free(to_free->message);
             free(to_free);
         }
     }
+}
+
+void print_global_messages(){
     //print les messages globaux
     Message* current = message_global;
-    printf("Messages globaux:\n");
+    printf("Global messages:\n");
     while (current != NULL) {
         Message* to_free = current; // Store the message to free later
         printf("%s\n", current->message);
         current = current->next;
+        free(to_free->message);
         free(to_free);
     }
 }
