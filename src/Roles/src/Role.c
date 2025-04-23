@@ -75,7 +75,16 @@ int play(Player *player, id card, Player *target, int current_round) // Play fun
      * 1 the played card was considered
      * 2 card cannot be played at this place
      * 3 player does not have enough money
+     * 4 player is frozen
+     * 5 card was not iplemented for the moment
+     * 11 succeeded broadcasr message
      */
+
+    if(player->Frozen){
+        notify_player(player, "You are frozen during this tour. :') \n");
+        player->Frozen--;
+        return FROZEN;
+    }
     if (card != COMMON_CARD && player->role != (card >> CARD_BITS))
     {
         // card not common and does not correspond to the role of its player

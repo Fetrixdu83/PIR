@@ -12,6 +12,8 @@
 #define WH_UPGRADE                  0x27
 #define WH_TRAINING                 0x28
 
+extern int protect_box;
+
 Player* WH_create_player();
 int WH_play(Player* player, id card, Player* target);
 int WH_end();

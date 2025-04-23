@@ -46,7 +46,8 @@ typedef struct Player{
 #define SUCCESS_BROADCAST 11
 #define FAILURE_WRONG_PLACE 2
 #define FAILURE_NOT_ENOUGH_MONEY 3
-#define NOT_IMPLEMENTED_YET 4
+#define FROZEN 4
+#define NOT_IMPLEMENTED_YET 5
 
 #define ALIVE 1
 #define DEAD 0
