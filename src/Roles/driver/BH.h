@@ -12,8 +12,12 @@
 #define BH_XSS                     0x17
 #define BH_PHYSICAL_ATTACK         0x18
 
+extern int Last_played_botnet;
+extern int Nb_botnet;
+extern int phishing;
+
 Player* BH_create_player();
-int BH_play(Player* player, id card, char target);
+int BH_play(Player* player, id card, Player* target,int current_round); // Play function for BH
 int BH_end();
 
 

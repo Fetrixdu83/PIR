@@ -1,12 +1,23 @@
 Game.c :
-    -[] play_cards : the played card not matching the role => exit or replay (line: 33)
-    -[] play_cards : card not permitted => exit or replay (line 44)
+    -[X] play_cards : the played card not matching the role => exit or replay (line: 33)
+    -[X] play_cards : card not permitted => exit or replay (line 44)
     -[X] eliminate_player : todo()
 Role.c :
-    - [] make interactions of the different cards : todo()
+    make interactions of the different cards :
+        -[X] BH
+        -[X] Company
+        -[X] Employee
+        -[X] WH
     - [X] comment the different section of the player 
-    - [] define the end condition for each player and write its function
+    - [X] define the end condition for each player and write its function
+
+BH.c :
+    - [] finish the two last cards (5 and 6)
+    - [] add a way to check that all players will be at the company for the THCon card
 
 Simulation.c:
     -[X] get_eliminated_player : todo()
+    -[X] print winner messages
+    -[X] switch return value of action done for player and treat it if needed
+    -[] add the investment of the company at the end of each turn (was not implemented for the moment but during discussion was approched)
     

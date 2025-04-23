@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../Roles/driver/Role.h"
+#include "Role.h"
 
 
 #define MAX_TURNS 10

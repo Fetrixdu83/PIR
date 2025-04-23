@@ -2,7 +2,7 @@
 #define ROLE_H
 
 typedef struct Message{
-    char message[255];
+    char* message;
     struct Message* next;
 }Message;
 
@@ -16,6 +16,8 @@ typedef struct Player{
     id place;  // player location
     Message* message; // saved messages
     int Alive; // is alive 
+    char Frozen; // is frozen for the next round
+    int honey_pot; // this int is to verify if the player had a placed honey pot on him
 }Player;
 
 #include <stdio.h>
@@ -33,27 +35,37 @@ typedef struct Player{
 
 #define CARD_BITS 4
 
-#define PLACE_ENTREPRISE 0
+#define PLACE_COMPANY 0
 #define PLACE_CYPERCAFE 1
 #define PLACE_BANK 2
 #define PLACE_LIBRARY 3
+
+#define FAILURE_CARD_NOT_MATCHING_PLAYER -2
+#define FAILURE_CARD_NOT_MATCHING_GAME_VERSION -1
+#define FAILURE_CARD_NOT_PERMITTED 0
 #define SUCCESS 1
-#define FAILURE_WRONG_PLACE -1
-#define FAILURE_NOT_ENOUGH_MONEY 0
+#define FAILURE_WRONG_PLACE 2
+#define FAILURE_NOT_ENOUGH_MONEY 3
+#define FROZEN 4
+#define NOT_IMPLEMENTED_YET 5
+
+#define NB_TOURS_NECESSARY_FOR_UPGRADE 4;
+
 #define ALIVE 1
 #define DEAD 0
+
 #define COMMON_CARD 0x1
 
 
-int end(Player** players);
+int end(Player** players, int nb_players);
 Player* init_player(int id); //function to initialize all variables for each player depending on their role
 Player* create_player(id carte);
-int play(Player* player, id card, char target);
+int play(Player* player, id card, Player* target,int current_round); // Play function for all players
 
 //Add an element to the message tab of the player
-void notify_player(Player* player, char message[255]);// Tab of message of 255 char max
+void notify_player(Player* player, char* message);// Tab of message of 255 char max
 void print_message(Player** player, int nb_players); // Print the message tab of the player
-void notify_broadcast(char message[255]); // Add a message to the global message list
-
+void notify_broadcast(char* message); // Add a message to the global message list
+void print_global_messages();
 
 #endif
