@@ -7,7 +7,7 @@ Role.c :
         -[X] BH
         -[X] Company
         -[X] Employee
-        -[] WH
+        -[X] WH
     - [X] comment the different section of the player 
     - [] define the end condition for each player and write its function
 

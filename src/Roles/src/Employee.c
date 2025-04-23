@@ -6,6 +6,7 @@ int printing_upgrading = 1; // initially 1 then takes +1 each time the card is p
 int rest = 0; // initially 0 , after taking a break becomes 1
 int password_training = 0; // initially false
 int betray = 0; // an int to describe if a proposal of betrayal is available
+int secured_passwords = 0; // initially employees use weak passwords => brute force them is easy
 
 int Employee_end() // Win condition of Employee
 {
@@ -27,10 +28,10 @@ Player *Employee_create_player() // Create a player with the Employee role
 
 int Employee_play(Player *player, id card, Player *target) // Play function for Employee
 {
-    if (password_training){
-        password_training--;
-        if (!password_training){
-            secured = 1;
+    if (password_training){ //check if password_training is being done
+        password_training--; // do the training for a tour (for 2 tours)
+        if (!password_training){    //once false <=> training is finished and passwords are well secured
+            secured_passwords = 1;
         }
     }
     switch (card)
@@ -145,5 +146,7 @@ int Employee_play(Player *player, id card, Player *target) // Play function for 
             notify_player(player, "You cannot do this card without a proposal of the BH. try to make him a sign he could offer you something;)\n");
             return FAILURE_CARD_NOT_PERMITTED;
         }
+    default:
+        return FAILURE_CARD_NOT_PERMITTED;
     }
 }

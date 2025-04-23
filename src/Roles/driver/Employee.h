@@ -14,6 +14,7 @@
 #define EM_BACKDOOR                 0x48
 
 extern int betray;
+extern int secured_passwords;
 
 Player* Employee_create_player();
 int Employee_play(Player* player, id card, Player* target);

@@ -17,6 +17,7 @@ typedef struct Player{
     Message* message; // saved messages
     int Alive; // is alive 
     char Frozen; // is frozen for the next round
+    int honey_pot; // this int is to verify if the player had a placed honey pot on him
 }Player;
 
 #include <stdio.h>
@@ -48,6 +49,8 @@ typedef struct Player{
 #define FAILURE_NOT_ENOUGH_MONEY 3
 #define FROZEN 4
 #define NOT_IMPLEMENTED_YET 5
+
+#define NB_TOURS_NECESSARY_FOR_UPGRADE 4;
 
 #define ALIVE 1
 #define DEAD 0

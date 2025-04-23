@@ -38,6 +38,7 @@ Player *init_player(int id)
     scanf("%x", &card);
     Player *player = create_player(card);
     player->num = id;
+    player->honey_pot = 0; //initially no honey pot is put
 
     if (player == NULL)
     {

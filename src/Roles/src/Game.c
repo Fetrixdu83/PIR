@@ -82,6 +82,10 @@ void play_cards(Game *game)
             printf("Player number %d is frozen and cannot play a card this turn.\n", i + 1);
         }
     }
+    if (secured_XSS){
+        // Upgrading system is necessary over the time
+        secured_XSS--;
+    }
     game->elapsed_turns++;
 }
 

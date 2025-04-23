@@ -26,6 +26,6 @@ extern Player* Company_player;
 
 extern int firewall_activated;
 extern int backup;
-extern int secured; // initially the company did not secure the physical access to its buildings
+extern int secured_againt_physical; // initially the company did not secure the physical access to its buildings
 
 #endif
