@@ -5,7 +5,8 @@ int common_card_price = 2; // picking a card costs 2 unless the player plays  th
 int printing_upgrading = 1; // initially 1 then takes +1 each time the card is played
 int rest = 0; // initially 0 , after taking a break becomes 1
 int password_training = 0; // initially false
-int betray = 0; // an int to describe if a proposal of betrayal is available
+int betray = 0; // an int to describe if a proposal of betrayal is accepted
+int betray_proposal = 0; //corrupt proposal
 int secured_passwords = 0; // initially employees use weak passwords => brute force them is easy
 
 int Employee_end() // Win condition of Employee
@@ -129,11 +130,12 @@ int Employee_play(Player *player, id card, Player *target) // Play function for 
             return FAILURE_NOT_ENOUGH_MONEY;
         }
     case EM_BACKDOOR:
-        if (betray){
+        if (betray_proposal){
             if(player->place == PLACE_COMPANY){
                 if (player->money>=3){
                     player->money -=3-rest;
                     notify_player(player, "You made a backdoor, this is gonne make the company lose a lot of money. Now you win with the BH.\n");
+                    betray = 1;
                     //todo discuss if the black hat will know if the employee betrayed the company or not
                     return SUCCESS;
                 }else{

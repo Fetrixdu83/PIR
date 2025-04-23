@@ -111,7 +111,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
     case WH_VPN:
         if (player->money >= 1)
         {
-            notify_player(player, "You are using a VPN. All your specific actions can now be played anywhere in the world as your conversations will be encrypted. Check different types of encryptions here : todo()\n");
+            notify_player(player, "You are using a VPN. All your specific actions can now be played anywhere in the world as your conversations will be encrypted. Check different types of encryptions here : https://www.fortinet.com/resources/cyberglossary/encryption \n");
             vpn = 1;
             return SUCCESS;
         }

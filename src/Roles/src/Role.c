@@ -2,12 +2,13 @@
 
 Message *message_global = NULL; // Global message list
 
-int end(Player **players)
+int end(Player **players, int nb_players)
 {
-    return BH_end() ||
-           WH_end() ||
-           Company_end() ||
-           Employee_end();
+    if(BH_end()) {return BH;}// Black team wins
+    else {
+        return Company_end(players, nb_players); // returns COMPANY if the end condition for company is satisfied, 0 otherwise
+    }
+    
 }
 
 Player *create_player(id carte) // si le format RFID est sur 32 BIT
@@ -33,7 +34,7 @@ Player *create_player(id carte) // si le format RFID est sur 32 BIT
 
 Player *init_player(int id)
 {
-    printf("Please input the code of a special card for the player n: %x.\n", id + 1);
+    printf("\nPlease input the code of a specific card for the player n: %x.\n", id + 1);
     int card;
     scanf("%x", &card);
     Player *player = create_player(card);
@@ -78,7 +79,6 @@ int play(Player *player, id card, Player *target, int current_round) // Play fun
      * 3 player does not have enough money
      * 4 player is frozen
      * 5 card was not iplemented for the moment
-     * 11 succeeded broadcasr message
      */
 
     if(player->Frozen){
@@ -190,7 +190,8 @@ void print_message(Player **players, int nb_players)
                 role = "employee";
                 break;
             }
-            printf("Messages for the  %d: ( Roles : %s) \n", (players[i]->num)+1, role);
+            printf("Messages for the  %d: ( Roles : %s)  \n", (players[i]->num)+1, role);
+            printf("IR: %d\n", players[i]->money);
             while (current != NULL)
             {
                 Message *to_free = current; // Store the message to free later
@@ -199,6 +200,7 @@ void print_message(Player **players, int nb_players)
                 free(to_free->message);
                 free(to_free);
             }
+            printf("\n");
         }
     }
 }
@@ -207,6 +209,7 @@ void print_global_messages()
 {
     // print les messages globaux
     Message *current = message_global;
+    printf("\n The company has %d IR.\n", Company_player->money);
     while (current != NULL)
     {
         Message *to_free = current; // Store the message to free later

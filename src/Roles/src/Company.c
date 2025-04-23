@@ -8,9 +8,24 @@ Player *employees[2] = {NULL, NULL};
 Player *white_hat = NULL;
 Player *Company_player = NULL;
 
-int Company_end() // Win condition of Company
+int Company_end(Player** players, int nb_players) // Win condition of Company
 {
-    return 0;
+    //wins if all black hats are dead and the if corrupted employees too
+    for (int i=0; i< nb_players; i++){
+        if (players[i]->Alive && players[i]->role==BH) return 0; // at least a black hat is still alive => game not finished
+    } 
+    //if all no black hat is alive we check if there is still a corrupted employee
+    if(betray){
+        // we check that the corrupted employee is alive or not (we declared a table as we plan to add the possibility to play with 2 employees : NB must add a mechanism to check which is the corrupted employee todo)
+        for(int i=0; i<2; i++){ 
+            if (employees[i]!=NULL){
+                if(employees[i]->Alive){
+                    return 0;
+                }
+            }
+        }
+    }
+    return COMPANY; // No black hat is alive and neither corrupted employee  
 }
 
 Player *Company_create_player() // Create a player with the Company role

@@ -14,6 +14,8 @@
 #define EM_BACKDOOR                 0x48
 
 extern int betray;
+extern int betray_proposal; //corrupt proposal
+
 extern int secured_passwords;
 
 Player* Employee_create_player();

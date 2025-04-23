@@ -14,7 +14,7 @@
 
 Player* Company_create_player();
 int Company_play(Player* player, id card, Player* target);
-int Company_end();
+int Company_end(Player** players, int nb_players);
 void company_add_employee(Player* employee);
 void promote_employees(int ir);
 void save_WH_id(Player* wh);

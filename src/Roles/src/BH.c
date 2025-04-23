@@ -7,6 +7,14 @@ int phishing = 0;
 
 int BH_end() // Win condition of BH
 {
+    if(Company_player->money<=0){
+        Company_player->Alive = 0;
+        notify_broadcast("The company lost its resources and declared bankruptcy\nThe black Hat team wins\n");
+        return BH;
+    }
+    if (!Company_player->Alive){
+        notify_broadcast("The company is dead the black team win\n");
+    }
     return 0;
 }
 
@@ -63,6 +71,7 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         {
             player->money -= 2;
             notify_player(target, "Are you interested in some big deals? Enroll in the BH team!\n");
+            betray_proposal = 1; //corrupt proposal
             return SUCCESS; // Card played successfully
         }
         else
@@ -147,7 +156,7 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
             }
             notify_broadcast("The company is being attacked by a brute force. This attack may slow down its functionning which may lead to a money loss\n");
 
-            return SUCCESS_BROADCAST; // Card played successfully
+            return SUCCESS; // Card played successfully
         }
         else if (current_round == 1)
         {

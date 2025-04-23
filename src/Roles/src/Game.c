@@ -30,7 +30,7 @@ void play_cards(Game *game)
 
     for (int i = 0; i < game->nb_players; i++)
     {
-        if (game->players[i]->Alive && game->players[i]->Frozen == 0)
+        if (game->players[i]->Alive)
         {
             printf("May the player number %d insert the card id, his position and the target\n", i + 1);
             scanf("%x %i %d", &card, &(game->players[i]->place), &target);
@@ -62,24 +62,17 @@ void play_cards(Game *game)
             case NOT_IMPLEMENTED_YET:
                 printf("not implemented yet\n");
                 break;
-            case SUCCESS_BROADCAST:
-                // card played was considered and a message need to be sent to all players
-                // Notify all players about the broadcast message
-                notify_broadcast("Broadcast message:  a force brutale has been conducted.\n");
+            case FROZEN:
+                printf("This player is frozen, he can't play so the action is going to be dropped\n");
                 break;
+            case FAILURE_CARD_NOT_PERMITTED:
+                printf("Card not permitted please check that it corresponds to your role and is a Card\n");
             default:
                 // default case not recongnized
                 printf("ERROR : [58] please take contact with the game devellopers informing the error id \n");
                 exit(1);
                 break;
             }
-        }
-        if (game->players[i]->Alive && game->players[i]->Frozen != 0)
-        {
-            // Player is frozen, so they cannot play a card this turn
-            game->players[i]->Frozen -= 1; // decrease the frozen counter
-            // Notify the player that they are frozen
-            printf("Player number %d is frozen and cannot play a card this turn.\n", i + 1);
         }
     }
     if (secured_XSS){
@@ -125,14 +118,17 @@ int end_game(Game *game)
     /**
      * Retruns 0 if the game is not finished
      * -1 if a draw
-     * the id of the id + 1 if a player with id =id won
+     * the int representing the Winner role
      */
     if (game->elapsed_turns > MAX_TURNS)
     {
+        if (white_hat->Alive){
+            return WH; 
+        }
         return -1;
     }
     else
     {
-        return end(game->players);
+        return end(game->players, game->nb_players);
     }
 }

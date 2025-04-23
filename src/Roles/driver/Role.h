@@ -44,7 +44,6 @@ typedef struct Player{
 #define FAILURE_CARD_NOT_MATCHING_GAME_VERSION -1
 #define FAILURE_CARD_NOT_PERMITTED 0
 #define SUCCESS 1
-#define SUCCESS_BROADCAST 11
 #define FAILURE_WRONG_PLACE 2
 #define FAILURE_NOT_ENOUGH_MONEY 3
 #define FROZEN 4
@@ -58,7 +57,7 @@ typedef struct Player{
 #define COMMON_CARD 0x1
 
 
-int end(Player** players);
+int end(Player** players, int nb_players);
 Player* init_player(int id); //function to initialize all variables for each player depending on their role
 Player* create_player(id carte);
 int play(Player* player, id card, Player* target,int current_round); // Play function for all players
