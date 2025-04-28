@@ -13,10 +13,16 @@ Black Hat  🎩 : Un cybercriminel cherchant à exploiter les failles de sécuri
 
 White Hat  🧢 : Un expert en cybersécurité qui tente de protéger les systèmes.
 
-Étudiant   👩🏻‍💻 : Un apprenant en cybersécurité qui doit naviguer entre les bonnes et mauvaises pratiques.
-
 Entreprise 🏢 : Une organisation cherchant à se protéger contre les cyberattaques.
 
+Employé   👩🏻‍💻 : Un employé de l'entreprise qui veille au bon fonctionnement de celle ci, néanmoins, il peut décider de s'allier avec le BlackHat afin de la faire tomber.
+
+## Prochainement 
+Nous comptons rajouter prochainement de nouveau roles: 
+
+Etudiant   👩🏻‍💻 : Un amateur de la cyber-sécurité, durant son parcours à TLS-SEC, il navigue entre les bonnes et mauvaises pratiques.
+
+Start-up 🏢 : Au vu des menaces, la start-up promet une meilleure gestion des données de ses clients. Elle essaie de gagner de part de marché. Alors est-ce vrai qu'elle a trouvé la clé infaillible de la cybersécurité?
 
 ## Fonctionnement
 
@@ -39,6 +45,8 @@ Montrer les différents points de vue des acteurs impliqués dans la sécurité 
 
 Offrir une expérience immersive et éducative à travers un jeu interactif.
 
+Ce jeu introduit les notions de phishing, VPN, XSS, brute force, injection_SQL, Dos et DDoS, les botnets et le social engineering ainsi que les bonnes pratiques pour se défendre.
+
 
 ## Versions futures
 
@@ -59,4 +67,4 @@ Le jeu et le code associé sont tous deux en anglais!
 - [CHEN Juxin](https://github.com/Juxin233)
 - [LAVERGNE Célia](https://github.com/C3-code)
 - [LACIRE Aurélie](https://github.com/aurelcre)
-- [DUPRAT Malik]()
+- [DUPRAT Malik](https://github.com/malik833)
