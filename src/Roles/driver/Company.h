@@ -8,7 +8,7 @@
 #define CO_SECURE_BUILDING          0x33
 #define CO_CONFERENCE               0x34
 #define CO_UNFAIR_COMPETETION       0x35
-#define CO_                         0x36
+#define CO_GOING_PUBLIC             0x36
 #define CO_PROMOTE_EM               0x37
 #define CO_FINANCE_WH               0x38
 

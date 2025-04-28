@@ -63,6 +63,7 @@ int Employee_play(Player *player, id card, Player *target) // Play function for 
         if (phishing){
             Company_player->money -=  (int)round((4 - rest) * (1+betray/3));
             rest = 0;
+            phishing = 0;
             notify_player(player, "You have been phished :') \n");
             notify_player(Company_player, "Your company was phished, you are losing money...\n You should have done some trainings... Think about it before it is too late\n");
 

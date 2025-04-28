@@ -66,7 +66,7 @@ void play_cards(Game *game)
                 printf("This player is frozen, he can't play so the action is going to be dropped\n");
                 break;
             case FAILURE_CARD_NOT_PERMITTED:
-                printf("Card not permitted please check that it corresponds to your role and is a Card\n");
+                printf("Card not permitted please check that it corresponds to your role and is a Card and corresponds to its requirements\n");
             default:
                 // default case not recongnized
                 printf("ERROR : [58] please take contact with the game devellopers informing the error id \n");
