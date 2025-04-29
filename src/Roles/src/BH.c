@@ -157,7 +157,7 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         }
 
     case BH_BRUTE_FORCE: // BH card 4
-        if (player->money >= 1 && current_round > 1)
+        if (player->money >= 1 && current_round > 0)
         {
             player->money -= 1;
             srand(time(NULL));

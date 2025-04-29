@@ -200,6 +200,7 @@ void print_message(Player **players, int nb_players)
                 free(to_free->message);
                 free(to_free);
             }
+            players[i]->message = NULL;
             printf("\n");
         }
     }
