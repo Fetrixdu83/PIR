@@ -12,8 +12,14 @@ Role.c :
     - [X] define the end condition for each player and write its function
 
 BH.c :
-    - [] finish the two last cards (5 and 6)
+    - [] finish the two last cards (5 and 6) : PS: 6 done => check what todo with the fifth card
     - [] add a way to check that all players will be at the company for the THCon card
+
+WH.c : 
+    - [X] implement the protect_box effect : selecting random number to see if the attack passes
+
+Company.c :
+    - [X] add the firewall effect
 
 Simulation.c:
     -[X] get_eliminated_player : todo()

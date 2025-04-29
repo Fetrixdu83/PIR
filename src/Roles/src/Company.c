@@ -2,6 +2,7 @@
 #include "../driver/Company.h"
 
 int firewall_activated = 0;
+int bourse = 0; // initially the company is not public
 int backup = 0;
 int secured_againt_physical = 0; // initially the company did not secure the physical access to its buildings
 Player *employees[2] = {NULL, NULL};
@@ -101,7 +102,7 @@ int Company_play(Player *player, id card, Player *target) // Play function for C
             switch (player->place)
             {
             case PLACE_BANK:
-                player->money += 4; // Gets 4 IR as investment
+                player->money += 4 + bourse; // Gets 4 IR as investment + 2 if the company is public (bourse)
                 return SUCCESS;     // Card played successfully
 
             case PLACE_LIBRARY:
@@ -180,9 +181,16 @@ int Company_play(Player *player, id card, Player *target) // Play function for C
         case CO_UNFAIR_COMPETETION: // Company card 5
             // Implement the effect of Company card 5
             return NOT_IMPLEMENTED_YET;
-        case CO_: // Company card 6
-            // Implement the effect of Company card 6
-            return NOT_IMPLEMENTED_YET;
+        case CO_GOING_PUBLIC: // Company card 6
+            if (player->money >= 4)
+            {
+                bourse = 2;
+                notify_broadcast("The Company went public.\n ");
+                player->money -= (int)round(4 * (1 + betray / 3));
+                return SUCCESS;
+            }
+            else
+                return FAILURE_NOT_ENOUGH_MONEY;
         case CO_PROMOTE_EM: // Company card 7
             if (player->money >= 6)
             {

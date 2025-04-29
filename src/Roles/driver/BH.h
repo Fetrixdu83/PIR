@@ -2,6 +2,7 @@
 #define BH_H
 
 #include "Role.h"
+#include <time.h>
 
 #define BH_CORRUPT                 0x11
 #define BH_BOTNET                  0x12

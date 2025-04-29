@@ -106,6 +106,11 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
             if (Nb_botnet > 0)
             {
                 Nb_botnet--; // Decrease the number of botnets
+                srand(time(NULL));
+                if((rand()%60)<protect_box){
+                    notify_player(player, "Oups, this attack did not succeed for an unknown reason. Maybe you should retry it another time.\n");
+                    return SUCCESS;
+                }
                 if (target->honey_pot)
                 { // a honey pot is in place
                     notify_player(player, "Oups, a honey pot was in place... the effect of this attack was dropped. Good news: the honey pot was dropped too\n");
@@ -115,20 +120,34 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
                 else
                 {
                     notify_player(target, "You have been attacked by a DDoS attack!\n");
-                    if (target == Company_player && backup)
+                    if (target == Company_player )
                     {
-                        // the company did backup and won't be frozen
-                        notify_player(target, "You did the backup, no worries ;)\n");
+                        if(backup){
+                            // the company did backup and won't be frozen
+                            notify_player(target, "You did the backup, no worries ;)\n");
+                        }
+                        else{
+                            if(firewall_activated){
+                                // the company did protect itself with a firewall
+                                notify_player(target, "You have a firewall. The DDoS is failing :)\n");
+                            }
+                            else{
+                                target->Frozen += 1; // Freeze the target player for the next turn
+                                notify_player(target, "You will not be able to play next round :')\n");
+                            }
+                        }
+                        
                     }
                     else
                     {
                         target->Frozen += 1; // Freeze the target player for the next turn
+                        notify_player(target, "You will not be able to play next round :')\n");
                     }
                 }
             }
             else
             {
-                return FAILURE_WRONG_PLACE; // Card played in a wrong place
+                return FAILURE_CARD_NOT_PERMITTED; // Card played in a wrong place
             }
             return SUCCESS; // Card played successfully
         }
@@ -141,6 +160,11 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         if (player->money >= 1 && current_round > 1)
         {
             player->money -= 1;
+            srand(time(NULL));
+            if((rand()%60)<protect_box){
+                notify_player(player, "Oups, this attack did not succeed for an unknown reason. Maybe you should retry it another time.\n");
+                return SUCCESS;
+            }
             if (secured_passwords)
             {
                 player->Frozen += 3; // Freeze the player for 3 turns if the company is protected
@@ -149,10 +173,16 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
             else
             {
                 player->Frozen += 2; // Freeze the player for 2 turns if the company is not protected
-                Company_player->money -= (int)round(10 * (1 + betray / 3));
-                player->money += 10;
-                notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
-                notify_player(player, "You are making a brute force attack, there is no defense, you are going to win 10 IR.\n");
+                Company_player->money -= (int)round((10 * (1 + betray / 3))/(1+firewall_activated));
+                player->money += 10/(1+firewall_activated);
+                if(firewall_activated){
+                    notify_player(Company_player, "The brute force attack made you lose only 5 IR as you have a firewall\n");
+                    notify_player(player, "You are making a brute force attack, unfortunately the company has a firewall, but you are still going to win 5 IR.\n");
+                }else{
+                    notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
+                    notify_player(player, "You are making a brute force attack, there is no defense, you are going to win 10 IR.\n");
+                }
+                
             }
             notify_broadcast("The company is being attacked by a brute force. This attack may slow down its functionning which may lead to a money loss\n");
 
@@ -188,6 +218,11 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         if (player->money >= 3)
         {
             player->money -= 3;
+            srand(time(NULL));
+            if((rand()%60)<protect_box){
+                notify_player(player, "Oups, this attack did not succeed for an unknown reason. Maybe you should retry it another time.\n");
+                return SUCCESS;
+            }
             if (Company_player->honey_pot)
             {
                 notify_player(player, "Oups, a honey pot was in place... the effect of this attack was dropped. Good news: the honey pot was dropped too\n");
@@ -202,7 +237,7 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
                 }
                 else
                 {
-                    player->money += 3; // Gain 3 money if the Company is not protected
+                    player->money += 4; // Gain 4 money if the Company is not protected
                 }
                 return SUCCESS; // Card played successfully
             }
@@ -216,7 +251,11 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         if (player->money >= 4)
         {
             player->money -= 4;
-
+            srand(time(NULL));
+            if((rand()%60)<protect_box){
+                notify_player(player, "Oups, this attack did not succeed for an unknown reason. Maybe you should retry it another time.\n");
+                return SUCCESS;
+            }
             if (Company_player->honey_pot)
             {
                 notify_player(player, "Oups, a honey pot was in place... the effect of this attack was dropped. Good news: the honey pot was dropped too\n");
@@ -228,12 +267,12 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
                 if (secured_XSS)
                 {
                     player->money += 3; // Gain 3 money if the target is protected
-                    Company_player->money -= (int)round(3 * (1 + betray / 3));
+                    Company_player->money -= (int)round((3* (1 + betray / 3)) / (1+firewall_activated));
                 }
                 else
                 {
-                    player->money += 6; // Gain 6 money if the target is not protected
-                    Company_player->money -= (int)round(6 * (1 + betray / 3));
+                    player->money += 6/(1+firewall_activated); // Gain 6 money if the target is not protected
+                    Company_player->money -= (int)round((6 * (1 + betray / 3))/(1+firewall_activated));
                 }
                 notify_player(Company_player, "You were attacked by an XSS attack !! \n");
                 return SUCCESS;
