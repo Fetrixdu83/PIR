@@ -35,7 +35,7 @@ void play_cards(Game *game)
             printf("May the player number %d insert the card id, his position and the target\n", i + 1);
             scanf("%x %i %d", &card, &(game->players[i]->place), &target);
             printf("card: %x position  %d et target %d\n", card, game->players[i]->place, target);
-            switch (play(game->players[i], card, game->players[target - 1], game->elapsed_turns - 1))
+            switch (play(game->players[i], card, game->players[target - 1], game->elapsed_turns))
             {
             case FAILURE_CARD_NOT_MATCHING_PLAYER:
                 // card not matching the role of the player => error or replay to be discussed
@@ -132,3 +132,6 @@ int end_game(Game *game)
         return end(game->players, game->nb_players);
     }
 }
+
+
+//if brut for avec current round, si 0 traitement dans la carte -> brute frozen

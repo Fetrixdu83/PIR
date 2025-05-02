@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
     printf("\n");
 
     // paly a first tour with no voting 
-    play_cards (game);
+    //play_cards (game);
     int end = end_game(game) ; // integer that permits to play more tours
     Player* to_eliminate = NULL;// no one to eliminate for the moment
     while( ! end ){

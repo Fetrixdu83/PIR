@@ -53,6 +53,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
     case WH_BLACK_BOX:
         if (player->money >= 1)
         {
+            player->money -= 1;
             protect_box = 12; // 12 out of 60 <=> 1 out of 5
             return SUCCESS;
         }
@@ -64,6 +65,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
     case WH_GREY_BOX:
         if (player->money >= 2)
         {
+            target->money -= 2;
             protect_box = 15; // 15 out of 60 <=> 1 out of 4 chances
             return SUCCESS;
         }
@@ -74,6 +76,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
     case WH_WHITE_BOX:
         if (player->money >= 3)
         {
+            player->money -= 3;
             protect_box = 20; // 20 out of 60 <=> 1 out of 3 to the protection to take place
             return SUCCESS;
         }
@@ -84,6 +87,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
     case WH_SELF_HONEY_POT:
         if (player->money >= 1)
         {
+            player->money -= 1;
             player->honey_pot = 1;
             return SUCCESS;
         }
@@ -96,6 +100,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
         {
             if (player->money >= 2)
             {
+                player->money -= 2;
                 target->honey_pot = 2;
                 return SUCCESS;
             }
@@ -111,6 +116,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
     case WH_VPN:
         if (player->money >= 1)
         {
+            player->money -= 1;
             notify_player(player, "You are using a VPN. All your specific actions can now be played anywhere in the world as your conversations will be encrypted. Check different types of encryptions here : https://www.fortinet.com/resources/cyberglossary/encryption \n");
             vpn = 1;
             return SUCCESS;

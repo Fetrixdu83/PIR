@@ -7,6 +7,7 @@ typedef struct Message{
 }Message;
 
 typedef unsigned int id;
+
 typedef struct Player{
     char role; // player role
     id piece;  // player pion  
