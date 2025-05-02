@@ -67,6 +67,7 @@ void play_cards(Game *game)
                 break;
             case FAILURE_CARD_NOT_PERMITTED:
                 printf("Card not permitted please check that it corresponds to your role and is a Card and corresponds to its requirements\n");
+                break;
             default:
                 // default case not recongnized
                 printf("ERROR : [58] please take contact with the game devellopers informing the error id \n");
@@ -134,4 +135,3 @@ int end_game(Game *game)
 }
 
 
-//if brut for avec current round, si 0 traitement dans la carte -> brute frozen

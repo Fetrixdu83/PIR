@@ -4,6 +4,8 @@
 int Last_played_botnet = -1;
 int Nb_botnet = 0;
 int phishing = 0;
+int bruteforce = 0; 
+int bruteplayed = 0; 
 
 int BH_end() // Win condition of BH
 {
@@ -40,6 +42,25 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
      * 0 card played was not permitted => effect was dropped
      * 1 the played card was considered
      */
+
+    if(bruteplayed == 1){
+        bruteforce --;
+        if(bruteforce == 0){
+            Company_player->money -= (int)round((10 * (1 + betray / 3))/(1+firewall_activated));
+            player->money += 10/(1+firewall_activated);
+            bruteplayed = 0;
+            printf("\n-\n-\nThe brute force attack is over, you are going to win some IR\n-\n-");
+            if(firewall_activated){
+                notify_player(Company_player, "The brute force attack made you lose only 5 IR as you have a firewall\n");
+            }
+            else{
+                notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
+            }    
+        }
+        return SUCCESS; // Card played successfully
+    }
+    
+
     switch (card)
     {
     case COMMON_CARD: // BH card 0 AKA Common card
@@ -157,8 +178,11 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         }
 
     case BH_BRUTE_FORCE: // BH card 4
+
         if (player->money >= 1 && current_round > 0)
         {
+            bruteforce = 2;
+            bruteplayed = 1;
             player->money -= 1;
             srand(time(NULL));
             if((rand()%60)<protect_box){
@@ -167,19 +191,17 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
             }
             if (secured_passwords)
             {
+                bruteforce = 3;
                 player->Frozen += 3; // Freeze the player for 3 turns if the company is protected
                 notify_player(player, "You are making a brute force attack, there might be a result in some tours.\n");
             }
             else
             {
                 player->Frozen += 2; // Freeze the player for 2 turns if the company is not protected
-                Company_player->money -= (int)round((10 * (1 + betray / 3))/(1+firewall_activated));
-                player->money += 10/(1+firewall_activated);
+                bruteforce = 2;
                 if(firewall_activated){
-                    notify_player(Company_player, "The brute force attack made you lose only 5 IR as you have a firewall\n");
                     notify_player(player, "You are making a brute force attack, unfortunately the company has a firewall, but you are still going to win 5 IR.\n");
                 }else{
-                    notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
                     notify_player(player, "You are making a brute force attack, there is no defense, you are going to win 10 IR.\n");
                 }
                 
