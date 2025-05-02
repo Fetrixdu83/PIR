@@ -51,10 +51,10 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
             bruteplayed = 0;
             printf("\n-\n-\nThe brute force attack is over, you are going to win some IR\n-\n-");
             if(firewall_activated){
-                notify_player(Company_player, "The brute force attack made you lose only 5 IR as you have a firewall\n");
+                //notify_player(Company_player, "The brute force attack made you lose only 5 IR as you have a firewall\n");
             }
             else{
-                notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
+                //notify_player(Company_player, "The brute force attack made you lose 10 IR\n");
             }    
         }
         return SUCCESS; // Card played successfully

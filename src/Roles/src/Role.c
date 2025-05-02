@@ -220,4 +220,5 @@ void print_global_messages()
         free(to_free->message);
         free(to_free);
     }
+    message_global = NULL; 
 }
