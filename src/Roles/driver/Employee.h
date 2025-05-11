@@ -17,6 +17,7 @@ extern int betray;
 extern int betray_proposal; //corrupt proposal
 
 extern int secured_passwords;
+extern Player* Employee_player;
 
 Player* Employee_create_player();
 int Employee_play(Player* player, id card, Player* target);

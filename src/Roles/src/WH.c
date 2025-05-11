@@ -133,7 +133,7 @@ int WH_play(Player *player, id card, Player *target) // Play function for WH
         if (player->money >= 4)
         {
             player->money -= 4;
-            secured_XSS = NB_TOURS_NECESSARY_FOR_UPGRADE;
+            secured_XSS = NB_TURNS_NECESSARY_FOR_UPGRADE;
             notify_player(player, "Well done, you have upgraded the systems. Remember to do this regularly as new vulnerabilities may appear. Keep up to date with the CVE (Common Vulnerabilities and Exposures) organization (https://cve.org) ;)\n");
             return SUCCESS;
         }

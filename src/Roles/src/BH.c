@@ -91,7 +91,7 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         if (player->money >= 2)
         {
             player->money -= 2;
-            notify_player(target, "Are you interested in some big deals? Enroll in the BH team!\n");
+            notify_player(Employee_player, "Are you interested in some big deals? Enroll in the BH team!\n");
             betray_proposal = 1; //corrupt proposal
             return SUCCESS; // Card played successfully
         }
@@ -193,7 +193,7 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
             {
                 bruteforce = 3;
                 player->Frozen += 3; // Freeze the player for 3 turns if the company is protected
-                notify_player(player, "You are making a brute force attack, there might be a result in some tours.\n");
+                notify_player(player, "You are making a brute force attack, there might be a result in some turns.\n");
             }
             else
             {
@@ -224,7 +224,7 @@ int BH_play(Player *player, id card, Player *target, int current_round) // Play 
         if (player->money >= 2)
         {
             player->money -= 2;
-            notify_player(target, "Hello Sir, \nFor your account security, please update your password regularly, \nplease click on the following link and change your password, thank you for your cooperation.\n https://www.google.com/search?q=phishing+attack+link&rlz=1C1GCEU_enFR1010FR1010&oq=phishing+attack+link&aqs=chrome..69i57j0i512l9.10345j0j7&sourceid=chrome&ie=UTF-8\n");
+            notify_player(Employee_player, "Hello Sir, \nFor your account security, please update your password regularly, \nplease click on the following link and change your password, thank you for your cooperation.\n https://www.google.com/search?q=phishing+attack+link&rlz=1C1GCEU_enFR1010FR1010&oq=phishing+attack+link&aqs=chrome..69i57j0i512l9.10345j0j7&sourceid=chrome&ie=UTF-8\n");
             phishing = 1;
             // il manque du mecanisme pour verifier la reussite de l'attaque
 

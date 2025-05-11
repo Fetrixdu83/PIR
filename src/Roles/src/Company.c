@@ -33,7 +33,7 @@ Player *Company_create_player() // Create a player with the Company role
 {
     Company_player = (Player *)malloc(sizeof(Player));
     Company_player->role = COMPANY;
-    Company_player->money = 6;
+    Company_player->money = 10;
     Company_player->played_card = NULL;
     Company_player->place = 0;
     Company_player->message = NULL; // Initialize message tab to NULL

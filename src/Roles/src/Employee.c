@@ -8,16 +8,16 @@ int password_training = 0; // initially false
 int betray = 0; // an int to describe if a proposal of betrayal is accepted
 int betray_proposal = 0; //corrupt proposal
 int secured_passwords = 0; // initially employees use weak passwords => brute force them is easy
+Player *Employee_player = NULL;
 
 int Employee_end() // Win condition of Employee
 {
     return 0;
 }
 
-/*pas de pointeur pour le moment j'en vois pas vraiment l'utilité*/
 Player *Employee_create_player() // Create a player with the Employee role
 {
-    Player *Employee_player = (Player *)malloc(sizeof(Player));
+    Employee_player = (Player *)malloc(sizeof(Player));
     Employee_player->role = EMPLOYEE;
     Employee_player->money = 3;
     Employee_player->played_card = NULL;
@@ -30,7 +30,7 @@ Player *Employee_create_player() // Create a player with the Employee role
 int Employee_play(Player *player, id card, Player *target) // Play function for Employee
 {
     if (password_training){ //check if password_training is being done
-        password_training--; // do the training for a tour (for 2 tours)
+        password_training--; // do the training for a tour (for 2 turns)
         if (!password_training){    //once false <=> training is finished and passwords are well secured
             secured_passwords = 1;
         }
@@ -102,7 +102,7 @@ int Employee_play(Player *player, id card, Player *target) // Play function for 
     case EM_PWD_TRAINING:
         if (player->money>=5){
             player->money -= 5 - rest;
-            notify_player(player, "The effect of this card will take place in 2 tours. You are still able to play next time.\n");
+            notify_player(player, "The effect of this card will take place in 2 turns. You are still able to play next time.\n");
             password_training = 2;
             return SUCCESS;
         } else{

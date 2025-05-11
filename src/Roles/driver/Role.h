@@ -50,7 +50,7 @@ typedef struct Player{
 #define FROZEN 4
 #define NOT_IMPLEMENTED_YET 5
 
-#define NB_TOURS_NECESSARY_FOR_UPGRADE 4;
+#define NB_TURNS_NECESSARY_FOR_UPGRADE 4;
 
 #define ALIVE 1
 #define DEAD 0
